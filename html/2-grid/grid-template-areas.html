@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+    <style>
+        .a,
+        .b,
+        .c,
+        .d,
+        .e,
+        .f {
+            background-color: rgba(0, 255, 0, 0.2);
+            padding: 10px;
+            border: 1px solid green;
+            border-radius: 10px;
+        }
+
+        .a {
+            grid-area: a;
+        }
+
+        .b {
+            grid-area: b;
+        }
+
+        .c {
+            grid-area: c;
+        }
+
+        .d {
+            grid-area: d;
+        }
+
+        .e {
+            grid-area: e;
+        }
+
+        .f {
+            grid-area: f;
+        }
+
+        .wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: minmax(100px, auto);
+            column-gap: 10px;
+            row-gap: 1em;
+            grid-template-areas:
+                "b a ."
+                "b a ."
+                "b c e"
+                "b d f";
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="a">A</div>
+        <div class="c">B</div>
+        <div class="b">C</div>
+        <div class="d">D</div>
+        <div class="e">E</div>
+        <div class="f">F</div>
+    </div>
+
+</body>
+</html>
