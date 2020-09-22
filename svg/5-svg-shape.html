@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+</head>
+<body>
+    <svg width="550" height="300">
+        <defs>
+            <lineargradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="cyan" stop-opacity="0.8"></stop>
+                <stop offset="100%" stop-color="yellow" stop-opacity="0.8"></stop>
+            </lineargradient>
+
+            <lineargradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="magenta" stop-opacity="0.8"></stop>
+                <stop offset="100%" stop-color="cyan" stop-opacity="0.8"></stop>
+            </lineargradient>
+
+            <lineargradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="yellow" stop-opacity="0.8"></stop>
+                <stop offset="100%" stop-color="magenta" stop-opacity="0.8"></stop>
+            </lineargradient>
+        </defs>
+
+        <!-- square -->
+        <rect x="30" y="30" width="240" height="240" fill="url(#gradient3)"></rect>
+
+        <!-- circle -->
+        <circle cx="270" cy="150" r="120" fill="url(#gradient1)"></circle>
+
+        <!-- triangle -->
+        <polygon points="400,30 270,270 520,270" fill="url(#gradient2)"></polygon>
+    </svg>
+</body>
+</html>

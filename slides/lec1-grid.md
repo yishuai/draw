@@ -72,6 +72,7 @@ class: middle, center
 - 指定元素的区域
   - grid-area
 - [MDN手册](https://developer.mozilla.org/zh-CN/docs/Web/CSS/grid-template-areas)
+
 ---
 # 课堂练习
 

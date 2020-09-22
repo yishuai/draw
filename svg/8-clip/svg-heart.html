@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+    <style>
+        img.color {
+            -webkit-clip-path: url('#heart');
+            clip-path: url('#heart');
+            width: 450px;
+            height: auto;
+        }
+    </style>
+
+</head>
+<body>
+    <svg width="0" height="0" viewBox="0 0 269.47 181">
+        <title>SVG Valentine</title>
+        <defs>
+            <clippath id="heart">
+                <path
+                    d="M259,72.83l8.07,6.63L248.79,89C239.93,72.26,222,60,198,60c-37,0-48,33-48,33s-11-33-48-33c-35,0-57,26-57,54,0,21.09,14.38,43.95,32.49,64.4l-16.77,8.75-22-1.37L18,196.56,35.43,202,30,219.44l20.67-10.79L62.11,189.8l17.44-9.1C110.15,214.43,150,241,150,241s105-70,105-127a53.54,53.54,0,0,0-4.88-22.3l18.35-9.58.82,10.41,18.21-22Z"
+                    transform="translate(-18.03 -60) scale(1.5)"></path>
+                <!-- the scale element was added to match the size of the raster graphic -->
+            </clippath>
+        </defs>
+    </svg>
+
+        <img class="color" src="all-colors.png" width="500" height="500" alt="Color gradient">
+</body>
+</html>

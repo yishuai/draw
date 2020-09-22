@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+
+    <style>
+        .c1 {
+            fill: red;
+            opacity: 0.5;
+        }
+
+        .c1:hover {
+            filter: url(#blur);
+        }
+    </style>
+
+</head>
+<body>
+    <svg width="520" height="320">
+        <defs>
+            <filter id="blur">
+                <fegaussianblur in="SourceGraphic" stdDeviation="5"></fegaussianblur>
+            </filter>
+        </defs>
+
+        <circle class="c1" cx="160" cy="160" r="150"></circle>
+    </svg>
+</body>
+</html>

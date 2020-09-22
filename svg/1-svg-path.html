@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+</head>
+<body>
+
+    <svg width="200" height="200">
+      <!-- square (that we could have just drawn with the rect element but that's ok) -->
+      <path d="
+        M 20 20
+        H 180
+        V 180
+        H 20
+        z"></path>
+    </svg>
+
+    <svg width="200" height="200">
+      <!-- polygon (that we could also draw with the polygon element) -->
+      <path d="
+        M 20 40
+        L 100 20
+        L 175 125
+        L 120 180
+        z"></path>
+    </svg>
+
+    <svg width="200" height="200">
+      <!-- polygon with bezier curve -->
+      <path d="
+        M 20 40
+        L 100 20
+        L 175 125
+        L 120 180
+        C 40 150
+          70 50
+          20 40"></path>
+
+      <!-- bezier curve handles -->
+      <circle cx="40" cy="150" r="4" fill="red"></circle>
+      <line x1="40" y1="150" x2="120" y2="180" stroke="red" stroke-width="1"></line>
+      <circle cx="70" cy="50" r="4" fill="red"></circle>
+      <line x1="70" y1="50" x2="20" y2="40" stroke="red" stroke-width="1"></line>
+    </svg>
+
+</body>
+</html>

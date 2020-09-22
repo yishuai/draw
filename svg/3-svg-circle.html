@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+
+    <style>
+        .c1 {
+            fill: red;
+        }
+
+        .c2 {
+            fill: green;
+        }
+
+        .c3 {
+            fill: blue;
+        }
+
+        .c1,
+        .c2,
+        .c3 {
+            opacity: 0.5;
+        }
+
+        .c1:hover,
+        .c2:hover,
+        .c3:hover {
+            opacity: 1;
+        }
+
+        .c1:active,
+        .c2:active,
+        .c3:active {
+            filter: url(#blur);
+        }
+    </style>
+
+</head>
+<body>
+    <svg width="520" height="320">
+        <defs>
+            <filter id="blur">
+                <fegaussianblur in="SourceGraphic" stdDeviation="5"></fegaussianblur>
+            </filter>
+        </defs>
+
+        <g id="circles">
+            <a xlink:href="http://i6.cims.nyu.edu/~jc3436/drawing/color/red/">
+                <circle class="c1" cx="160" cy="160" r="150"></circle>
+            </a>
+            <a xlink:href="http://i6.cims.nyu.edu/~jc3436/drawing/color/green/">
+                <circle class="c2" cx="260" cy="160" r="150"></circle>
+            </a>
+            <a xlink:href="http://i6.cims.nyu.edu/~jc3436/drawing/color/blue/">
+                <circle class="c3" cx="360" cy="160" r="150"></circle>
+            </a>
+        </g>
+    </svg>
+</body>
+</html>
