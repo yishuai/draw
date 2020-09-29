@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)http://i6.cims.nyu.edu/~jc3436/drawing/css/2d-transforms.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>CSS 2D Transforms</title>
+    <style>
+      /*vertical centering*/
+      body {
+        margin: 0;
+        height: 100vh; /* viewport height (percentage) */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #container {
+        display: flex;
+        /* display: inline; */
+      }
+
+      .compass {
+        padding: 5px;
+      }
+
+      .c1 {
+        /* transform: translate(75px, -50px); */
+        /* transform: translateY(-50px); */
+        /* transform-origin: bottom left; */
+      }
+
+      .c2 {
+        /* transform: rotate(45deg); */
+        /* transform: rotate(90deg); */
+        /* default value  */
+        /* transform-origin: 50% 50%; */
+        transform-origin: bottom left;
+        /* transform-origin: bottom right; */
+        /* transform-origin: top right; */
+        /* transform-origin: top left; */
+      }
+
+      .c3 {
+        /* x and y values */
+        /* transform: scale(0.5, 0.5) rotate(180deg); */
+        /*transform: scaleX(0.5);*/
+      }
+
+      .c4 {
+        /* x and y axes */
+        /* transform: skew(40deg, 20deg);  */
+
+      }
+
+      .c2:hover {
+        /* transform: scale(1.2, 1.2); */
+      }
+    </style>
+</head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <div id="container">
+      <!-- <img class="compass c1" src="rect.svg" width="200" height="200"> -->
+      <img class="compass c2" src="rect.svg" width="200" height="200">
+      <!-- <img class="compass c3" src="rect.svg" width="200" height="200"> -->
+      <!-- <img class="compass c4" src="rect.svg" width="200" height="200"> -->
+    </div>
+
+</body></html>
