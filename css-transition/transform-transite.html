@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- saved from url=(0061)http://i6.cims.nyu.edu/~jc3436/drawing/css/2d-transforms.html -->
+<!-- saved from url=(0069)http://i6.cims.nyu.edu/~jc3436/drawing/css/transform-transitions.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>CSS 2D Transforms</title>
+    <title>CSS Transform Transitions</title>
     <style>
-      /*vertical centering*/
+      /* centering */
       body {
         margin: 0;
         height: 100vh; /* viewport height (percentage) */
@@ -19,36 +19,24 @@
 
       .compass {
         padding: 5px;
+        transition-property: transform;
+        transition-duration: 500ms;
       }
 
-      .c1 {
-        /* transform: translate(75px, -50px); */
-        /* transform: translateY(-50px); */
-        /* transform-origin: bottom left; */
-      }
-
-      .c2 {
-        /* transform: rotate(45deg); */
+      .c1:hover {
         transform: rotate(90deg);
-        /* default value  */
-        /* transform-origin: 50% 50%; */
-        /* transform-origin: bottom left; */
-        /* transform-origin: bottom right; */
-        /* transform-origin: top right; */
-        /* transform-origin: top left; */
-      }
-
-      .c3 {
-        transform: scale(0.5, 0.5) rotate(180deg); /* x and y values */
-        /*transform: scaleX(0.5);*/
-      }
-
-      .c4 {
-        transform: skew(0deg, 40deg); /* x and y axes */
       }
 
       .c2:hover {
-        transform: scale(1.2, 1.2);
+        transform: rotate(180deg);
+      }
+
+      .c3:hover {
+        transform: rotate(-90deg);
+      }
+
+      .c4:hover {
+        transform: rotate(-180deg);
       }
     </style>
 </head>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)http://i6.cims.nyu.edu/~jc3436/drawing/css/transition-basics.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>CSS Transition Basics</title>
+    <style>
+      .shape {
+        width: 200px;
+        height: 25px;
+        border-radius: 5px;
+        margin-bottom: 1px;
+        background-color: gray;
+
+        /* individual transition properties */
+        /* transition-property: background-color transform; */
+        /* transition-duration: 2s; */
+
+        /* fast-slow-medium */
+        /* transition-timing-function: cubic-bezier(.1, .9, .9, .5); */
+
+        /* default: slow start, then fast, end slowly; */
+        /* transition-timing-function: ease;  */
+
+        /* transition-delay: 250ms; */
+
+        /* transition property shorthand */
+        /* transition all animatable properties over 500 milliseconds, with default easing, and no delay) */
+        /* transition: all 500ms ease 0s;*/
+
+        /* multiple transitions in sequence */
+        transition: background-color 200ms ease-in, transform 200ms ease-out 100ms;
+        transition: background-color 200ms ease-in, transform 200ms ease-out 100ms;
+      }
+
+      .shape:hover {
+        background-color: black;
+        transform: translateX(25px);
+      }
+
+      .shape:active {
+        background-color: red;
+        transition-duration: 0s;
+      }
+    </style>
+</head>
+
+  <body>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+
+</body></html>

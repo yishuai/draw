@@ -32,8 +32,9 @@
         position: absolute;
         width: 200px;
         height: 200px;
-        border-radius: 100px; /* make squares into circles */
-        opacity: 0.9;
+        /* make squares into circles */
+        border-radius: 100px;
+        opacity: 0.5;
         background: linear-gradient(yellow, violet);
         background-image: url('petal-texture.jpg');
         background-size: 200px 200px;
@@ -51,13 +52,15 @@
 
       /* petal 1 */
       .petal:nth-child(2) {
-        transform: rotateY(0deg) translateZ(140px) rotate3d(-2, 0.5, 0, 45deg);
+        /* transform: rotateY(0deg) translateZ(140px) rotate3d(-2, 0.5, 0, 45deg); */
         /* transform: rotateY(0deg) translateZ(140px) rotate3d(-1, 0.5, 0, 45deg); */
+        transform: translateZ(140px);
       }
 
       /* petal 2 */
       .petal:nth-child(3) {
-        transform: rotateY(60deg) translateZ(140px) rotate3d(-2, 0.5, 0, 45deg);
+        /* transform: rotateY(60deg) translateZ(140px) rotate3d(-2, 0.5, 0, 45deg); */
+        /* transform: translateZ(-140px); */
       }
 
       /* petal 3 */
@@ -100,14 +103,14 @@
         animation-duration: 4s;
       }
 
-      @keyframes rotate {
+      @keyframes rotate{
         from {transform: rotateY(0deg);}
         to {transform: rotateY(360deg);}
       }
 
       .flower {
         /* animation-name: rotate; */
-        animation-duration: 40s;
+        animation-duration: 6s;
       }
     </style>
 </head>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)http://i6.cims.nyu.edu/~jc3436/drawing/css/scale-transition.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Image Scale Transition</title>
+    <style>
+      img:hover {
+        transform: scale(1.2, 1.2);
+      }
+
+      .frame {
+        width: 320px;
+        height: 240px;
+        overflow: hidden;
+      }
+
+      img {
+        transition-property: transform;
+        transition-duration: 1s;
+      }
+    </style>
+  </head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <div class="frame">
+      <img src="crosswalk.png" width="320" height="240">
+    </div>
+
+</body></html>

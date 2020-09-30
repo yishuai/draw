@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)http://i6.cims.nyu.edu/~jc3436/drawing/css/skater-animation.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>CSS Animation Basics</title>
+    <style>
+      @keyframes skate {
+        0% {transform: translate(-400px, 300px); opacity: 0;}
+        33% {transform: translate(400px, 200px) rotate(0deg); opacity: 1;}
+        66% {transform: translate(100px, -400px) rotate(360deg);}
+        100% {transform: translate(0px, 0px);}
+      }
+
+      img {
+        animation-name: skate;
+        animation-duration: 3s;
+        animation-fill-mode: forwards;
+      }
+    </style>
+  </head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <img src="skater.png" width="175" height="175" alt="skateboarder">
+
+</body></html>

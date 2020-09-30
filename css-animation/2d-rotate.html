@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)http://i6.cims.nyu.edu/~jc3436/drawing/css/rotation-animation.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>CSS Rotation Animation</title>
+    <style>
+      /* centering */
+      body {
+        margin: 0;
+        height: 100vh; /* viewport height (percentage) */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #container {display: flex;}
+
+      @keyframes rotation {
+        from {transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+      }
+
+      .compass {
+        padding: 5px;
+/*        animation-name: rotation;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-direction: normal;*/
+        animation: rotation 2s infinite linear normal;
+      }
+
+      .c1 {animation-duration: 8s;}
+      .c2 {animation-duration: 4s;}
+      .c3 {animation-duration: 2s;}
+      .c4 {animation-duration: 1s;}
+    </style>
+</head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <div id="container">
+      <img class="compass c1" src="compass.svg" width="200" height="200">
+      <img class="compass c2" src="compass.svg" width="200" height="200">
+      <img class="compass c3" src="compass.svg" width="200" height="200">
+      <img class="compass c4" src="compass.svg" width="200" height="200">
+    </div>
+
+</body></html>
