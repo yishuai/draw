@@ -318,7 +318,7 @@ transform: translateZ(-100px) rotateX(  90deg);
 [Des Card Flip 教程](https://3dtransforms.desandro.com/card-flip)
 
 ---
-# Flower 拆解
+# Flower
 
 [花瓣](../css-transform/lab/flower.html)
 
