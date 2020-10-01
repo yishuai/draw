@@ -46,11 +46,14 @@
       /*font*/
       .face:nth-child(1) {
         /* unnecessary */
-        /* transform: rotateY(0deg) translateZ(100px); */
+        transform: rotateY(0deg) translateZ(100px);
         /* transform: rotateY(180deg) rotateX(180deg); */
-        transform: rotateY(30deg) rotateX(30deg);
-        /* transform: rotateY(-90deg) translateZ(100px); */
+        /* transform: rotateY(30deg); */
+        /* transform: rotateX(-90deg) translateZ(100px); */
         /* transform: rotateY(-90deg); */
+        /* transform: translateZ(100px); */
+        /* transform: translateZ(100px) rotateY(-90deg); */
+
         background: red;
       }
 
@@ -90,8 +93,8 @@
         /* 100% {transform: rotateY(360deg) rotateX(360deg);} */
         /* 100% {transform: rotateY(0deg) rotateX(360deg);} */
         /* 100% {transform: rotateY(360deg) rotateX(0deg);} */
-        100% {transform: rotateZ(360deg) rotateX(0deg);}
-        /* 100% {transform: rotateY(360deg) rotateX(360deg) rotateZ(360deg);} */
+        /* 100% {transform: rotateZ(360deg) rotateX(0deg);} */
+        100% {transform: rotateY(360deg) rotateX(360deg) rotateZ(360deg);}
       }
 
       /* bind the animation to a DOM element */
@@ -112,11 +115,11 @@
     <div id="scene">
       <div class="cube">
         <div class="face">前面</div>
-        <!-- <div class="face">Right</div> -->
-        <!-- <div class="face">Back</div> -->
-        <!-- <div class="face">Left</div> -->
-        <!-- <div class="face">Top</div> -->
-        <!-- <div class="face">Bottom</div> -->
+        <div class="face">Right</div>
+        <div class="face">Back</div>
+        <div class="face">Left</div>
+        <div class="face">Top</div>
+        <div class="face">Bottom</div>
       </div>
     </div>
 
