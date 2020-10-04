@@ -100,3 +100,42 @@ class: middle, center
 # 课堂练习
 
 - 示例代码：<a href="html/1-av/audio-video.html">网页</a>，<a href="html/1-av.zip">下载（5MB）
+
+---
+# 练习
+
+Project Portfolio
+Begin by creating a new directory on i6 specifically for your work in this class. Call this directory “380” or “drawing”. Then, using HTML and CSS, create a distinctive portfolio page for your class work. This page should serve as a portal for the following assignments.
+
+HTML and CSS
+SVG
+CSS Animation
+Version Control and Collaboration
+JavaScript
+HTML Canvas
+WebGL
+Final Project
+You should design the page to reflect your own aesthetic preferences including color, typography, graphics, and layout. Your name and the course title, “Drawing on the Web,” should also appear on the page. Over the course of the semester, as each assignment is completed—including the HTML and CSS drawing—you should add a link to it from here.
+
+---
+# 练习
+
+HTML and CSS Drawing
+The second part of this assignment is an opportunity for you to combine images and media in the browser to create an original, multilayered, HTML and CSS drawing. How you go about this is open to interpretation but here are a few requirements.
+
+Create a new subdirectory of your “380” or “drawing” directory for this project.
+Your drawing should take up the full browser window.
+There should be multiple, separate layers of imagery on the page (i.e. foreground, background, and in-between).
+Your drawing should include time-based media in the form of video or animation.
+Your drawing should include background music or sound using the HTML audio element.
+While the HTML and CSS code should be your own, feel free to incorporate found images and media into the project. This page is intended to be seen and experienced more than read; as such, you should limit HTML text on the page.
+
+---
+# 要求
+
+Studentʼs portfolio page, in a dedicated subdirectory of their i6 account, with their name and navigational elements for this and future assignments (2 points)
+The portfolio page should include CSS for font, color, and layout (2 points)
+An original HTML and CSS drawing that occupies the full browser window (2 points)
+At least two separate layers of imagery on the page (2 points)
+Time-based media in the form of video or animation (1 point)
+Background music or sound, using the HTML5 audio element (1 point)

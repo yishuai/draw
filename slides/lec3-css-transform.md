@@ -343,3 +343,23 @@ transform: translateZ(-100px) rotateX(  90deg);
 应用视觉设计介绍
 
 https://learn.freecodecamp.one/responsive-web-design/applied-visual-design
+
+---
+# 练习
+
+Drawing
+Using shapes coded with CSS, create a three-dimensional drawing (other than a cube) of an abstract or representational form. Your drawing should employ CSS transforms with 3D perspective to create at least six shapes that exist on the X, Y, and Z axes. Taken together, these shapes can create abstract polyhedron of varying complexity or familiar forms such as a bird, tree, flower, or building. The drawing should be created exclusively with HTML and CSS and, as usual, must be designed and coded by you.
+
+Animation
+Once you’ve completed the drawing, animate it using the CSS @keyframes rule. You may choose to animate the entire drawing or isolated aspects of it. You might also animate multiple copies of your original drawing to create a more scenic effect in the browser window. Finally, add a CSS transition in response to a user gesture such as the :hover or :active peudoclasses.
+
+Beyond these requirements, feel free to add additional CSS and/or raster graphics to complete your drawing.
+
+---
+# 要求
+
+A new web page with a custom CSS drawing (1 point)
+The drawing should employ three-dimensional CSS transforms with perspective (2 points)
+The drawing should include at least six shapes (3 points)
+The drawing should be animated with the @keyframes rule (3 points)
+The drawing should include a CSS transition in response to a user gesture (1 point)

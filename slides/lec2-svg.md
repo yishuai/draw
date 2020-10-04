@@ -558,3 +558,31 @@ web上的svg文件可以直接在浏览器上展示，或者通过以下几种�
 
 - 为学堂设计一个图标
 - 参考：[icomoon](https://icomoon.io/app/)
+
+---
+# 练习
+
+create an SVG icon system.
+
+Vector Glyphs
+You can think of an icon system as a set of categorically-related symbols designed with a consistent aesthetic. Begin by considering what category or theme you would like to design your icon system around. Once you decide, you may want to take some time to sketch out a few preliminary symbols that will guide your approach to the rest of them. Your icon system for the SVG assignment should consist of at least five original symbols.
+
+Using a text editor and, optionally, illustration software, create a series of vector graphic symbols—each in its own document—that will comprise your icon system. When applied to a web page, your icon system will function similar to a text font. As such, you need not worry about the color of each symbol. Design each to be a two-dimensional, black glyph that will read well at variable sizes.
+
+SVG Code
+Once you’ve completed the design of your icon system, make sure each symbol is simplified into a single, continuous shape. If you’ve used illustration software, convert any paths into shapes and merge all shapes into their simplest form—you should be able to select the entire icon with one click. Then, export each individual project file in SVG format. This results in multiple, plain text documents of SVG code that can be viewed in a text editor.
+
+Using your text editor and/or the IcoMoon app, create an SVG sprite by combining the essential code for each symbol into a single SVG document. Each individual icon should be enclosed in a <symbol> element with a unique id and consistent viewBox attributes. Each <symbol> element should contain <title> and <path> tags. <title> serves as the descriptive text of each icon and <path> defines the vector shape.
+
+Web Page
+With your icon system coded into a single SVG document, you will incorporate the full palette of symbols into a new web page. Use the <svg> element along with the <use> child element to display each symbol of your icon system. For maximum browser compatibility, use the following XML syntax to link to each symbol: xlink:href="icons.svg#glyph", where icons.svg is the name of the file and #glyph is the id of a particular symbol in the file.
+
+Now, use CSS to style each each of the icons in your system. A good way to do this is to give the parent, <svg> element a class that can be referenced by your CSS selector. You should include fill (color), width, and height properties for all of your symbols. Lastly, lay out the icons so that they are uniformly visible across the browser window. Feel free to add additional design elements to the page appropriate to the theme of your icon system.
+
+---
+# 要求
+
+An original icon system of at least five vector symbols that are categorically and aesthetically related (5 points)
+A single SVG document that contains the code for the full icon system (2 points)
+A web page that displays each symbol of the icon system together (1.5 points)
+CSS for the color and size of each symbol, displayed uniformly across the page. (1.5 points)
