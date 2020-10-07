@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rocketeer - Home</title>
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
+    <!--CSS & JS-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="jquery-3.4.1.min.js"></script>
+  </head>
+
+  <body class="fade-out">
+    <script>document.body.className += 'fade-out';</script>
+    <img src="assets/img/background-home.png" id="background" alt="purple space graphic with planets"/>
+    <!--Navigation bar-->
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <img src="assets/img/rocket_logo.png" id="logo" alt="word Rocketeer with rocket icon"/>
+      </a>
+      <div id="navlinks">
+        <a href="parts.html">
+          <div class="nav-element">Parts</div>
+        </a>
+        <a href="flight.html">
+          <div class="nav-element">Flight</div>
+        </a>
+      </div>
+    </nav>
+
+    <!--Page content-->
+    <div class="content">
+      <div class="home-text">
+        <div id="title">Simple rocket science.</div>
+        <div id="subtitle">Making rocket science more accessible and understandable to everyone.</div>
+        <div id="button">
+          <a class="btn" href="parts.html" data-type="page-transition">
+            <img src="assets/img/learn_more.png" id ="btn" alt="yellow learn more button"/>
+          </a>
+        </div>
+      </div>
+      <div id="space"></div>
+    </div>
+
+    <!--Animation components-->
+    <main>
+      <img src="assets/img/rocket1.png" id="rocket1" alt="grey rocket graphic"/>
+    </main>
+    <div class="shadow"></div>
+    <script src="assets/scripts/script.js"></script>
+  </body>
+</html>

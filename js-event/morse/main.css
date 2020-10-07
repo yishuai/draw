@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+
+@font-face {
+  font-family: Prociono;
+  src:
+    url('fonts/Prociono-Regular-webfont.woff'),
+    url('fonts/Prociono-Regular-webfont.ttf');
+}
+
+body {
+  background-color: #d8dee6;
+  background-image: url('images/telegraph-drawing.png');
+  background-size: 250px 300px;
+}
+
+/* Text */
+
+p {
+  font-family: Prociono, Times, serif;
+  font-size: 1em;
+  line-height: 1.4em;
+}
+
+h1 {
+  font-family: 'Roboto Slab', Times, serif;
+  text-align: center;
+}
+
+h2 {
+  font-family: 'Roboto Slab', Helvetica, sans-serif;
+  text-decoration: underline;
+  font-size: 1.2em;
+  position: sticky;
+  top: 0;
+  margin-top: 0;
+}
+
+a:link, a:visited {
+  color: black;
+  text-decoration: none;
+  background-color: white;
+}
+
+a:hover {
+  color: #d8dee6;
+}
+
+a:active {
+  background-color: black;
+}
+
+/* Layout */
+
+#container {
+  width: 90%;
+  margin: auto;
+  max-width: 72em; /* maximum layout width */
+}
+
+img.portrait {
+  margin-bottom: 1em;
+}
+
+footer {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+/* Media Queries */
+
+@media (min-width: 30em) {
+  img.portrait {
+    float: left; /* float text around image */
+    margin-right: 1em;
+  }
+}
+
+@media (min-width: 40em) {
+  img.portrait {
+    float: none; /* remove float from image */
+  }
+
+  #container {
+    display: grid; /* grid layout */
+    grid-template-columns: 200px 1fr;
+    gap: 1em;
+    grid-template-areas:
+      "a a"
+      "b c"
+      "d d";
+  }
+
+  h1 {
+    grid-area: a;
+  }
+
+  img.portrait {
+    grid-area: b;
+  }
+
+  main {
+    grid-area: c;
+  }
+
+  footer {
+    grid-area: d;
+  }
+}
+
+@media (min-width: 60em) {
+  main {
+    display: flex; /* multicolumn text */
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  article {
+    width: 49%;
+  }
+}

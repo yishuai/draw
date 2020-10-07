@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+</head>
+<body>
+    <script>
+        const background = document.querySelector('body');
+
+        function randomColor() {
+            let randomNumber = Math.floor(Math.random() * 360);
+            // console.log(randomNumber);
+            background.style.backgroundColor = "hsl(" + randomNumber + ", 100%, 50%)";
+        }
+
+        // 页面加载时调用函数
+        window.addEventListener('load', randomColor);
+
+        /*
+        将颜色映射到X和Y坐标
+        */
+
+        let hueBrowserRatio;
+        let lightnessBrowserRatio;
+
+        function colorScale() {
+            let browserWidth = window.innerWidth;
+            let browserHeight = window.innerHeight;
+            // console.log('浏览器宽度: ' + browserWidth);
+            // console.log('浏览器高度: ' + browserHeight);
+
+            hueBrowserRatio = browserWidth / 360;
+            lightnessBrowserRatio = browserHeight / 100;
+            // console.log('色相/浏览器比率: ' + hueBrowserRatio);
+            // console.log('亮度/浏览器比率: ' + lightnessBrowserRatio);
+        }
+
+        function getPosition(event) {
+            let xPos = event.clientX;
+            let yPos = event.clientY;
+
+            updateColor(xPos, yPos);
+        }
+
+        function updateColor(xPos, yPos) {
+            // 将色相映射到相对于浏览器宽度的鼠标位置
+            let hue = Math.ceil(xPos / hueBrowserRatio);
+            console.log('色调: ' + hue);
+
+            // 将亮度映射到相对于浏览器高度的鼠标位置
+            let lightness = 100 - Math.ceil(yPos / lightnessBrowserRatio);
+            console.log('亮度: ' + lightness);
+
+            // 应用背景色的色相，饱和度和亮度
+            background.style.backgroundColor = "hsl(" + hue + ", 100%, " + lightness + "%)";
+        }
+
+        // 页面加载时更新比例
+        window.addEventListener('load', colorScale);
+
+        // 调整窗口大小时更新比例
+        window.addEventListener('resize', colorScale);
+
+        // 检测光标移动
+        window.addEventListener('mousemove', getPosition);
+    </script>
+</body>
+</html>

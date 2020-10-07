@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Rocketeer - Flight</title>
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
+    <!--CSS & JS-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="jquery-3.4.1.min.js"></script>
+  </head>
+
+  <body class="fade-out">
+    <script>document.body.className += 'fade-out';</script>
+    <!--Navigation bar-->
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <img src="assets/img/rocket_logo.png" id="logo" alt="word Rocketeer with rocket icon"/>
+      </a>
+      <div id="navlinks">
+        <a href="parts.html">
+          <div class="nav-element">Parts</div>
+        </a>
+        <a href="flight.html">
+          <div class="nav-element">Flight</div>
+        </a>
+      </div>
+    </nav>
+
+    <!--Background-->
+    <img src="assets/img/background-flight.png" id="background" alt="purple space scene with planets"/>
+
+    <!--Content-->
+    <div class="text">
+      <div class="part-one">
+        <div id="header">NEWTON'S THREE LAWS</div>
+        <div id="subtext">To learn how a rocket flies, you must first understand Isaac Newton’s Laws of Motion.  Together, they make the basis for how rockets are designed and navigated.</div>
+      </div>
+      <div class="part-two">
+        <div id="law">
+          <div id="subheader">FIRST LAW</div>
+          <div id="subtext">The first law describes inertia: objects remain in motion (or remain still) unless disturbed by a force.  Thus, the gas fired down in take-off propels the rocket into space. The same mechanism moves the rocket forwards in space and keeps it in place on the launchpad.</div>
+          <div id="srocket"><img src="assets/img/law1graphic.png" id="law1rocket" alt="tiny grey rocket"/></div>
+        </div>
+        <div class="law">
+          <div id="subheader">SECOND LAW</div>
+          <div id="subtext">Newton’s second law of motion states that force equals mass times acceleration (f= ma). Thus, the more gas (propellant) fired from the rocket, the greater the acceleration and thrust (see below). More technical rocket science also includes pressure in this equation.</div>
+          <div id="srocket"><img src="assets/img/law2graphic.png" id="law2rocket" alt="tiny grey rocket"/></div>
+        </div>
+        <div class="law">
+          <div id="subheader">THIRD LAW</div>
+          <div id="subtext">The final law states that “for every action there is an equal and opposite action” (NASA).  So, the force released by the rocket must be strong enough to drive the rocket where you want it to go. Additionally, the rocket must generate enough energy to leave the planet’s orbit (gravity), by the same law.</div>
+          <div id="srocket"><img src="assets/img/law3graphic.png" id="law3rocket" alt="tiny grey rocket"/></div>
+        </div>
+      </div>
+      <div class="part-three">
+        <div id="graphic">
+          <img src="assets/img/tdgraphic.png" id="tdrocket" alt="tiny grey rocket"/>
+        </div>
+        <div id="thrustndrag">
+          <div id="header">THRUST & DRAG</div>
+          <div id="subtext">The concepts of thrust and drag are crucial to understanding basic rocket science. Thrust is the force that propels the rocket, which we know from Newton’s Laws, depend on the mass and acceleration of the propellant released by the rocket to overcome the force of gravity. Drag, or air resistance, also acts against thrust. Thus, the rocket must generate enough thrust to counteract both the force of gravity and the force from air resistance. </div>
+        </div>
+      </div>
+    </div>
+    <a href="final.html">
+      <img src="assets/img/finalbutton.png" id="finalbutton" alt="yellow button to finish"/>
+    </a>
+  </body>
+</html>

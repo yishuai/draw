@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #container {
+        width: 724px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    img {
+        margin: 1px;
+    }
+
+    .opaque {
+        opacity: 1;
+        transition: opacity 750ms;
+    }
+
+    .semitransparent {
+        opacity: 0.5;
+        transition: opacity 750ms;
+    }
+</style>
+</head>
+<body>
+    <div id="container">
+        <img class="opaque" src="spring.jpg" width="360" height="200">
+        <img class="opaque" src="summer.jpg" width="360" height="200">
+        <img class="opaque" src="autumn.jpg" width="360" height="200">
+        <img class="opaque" src="winter.jpg" width="360" height="200">
+    </div>
+
+    <script src="image-opacity.js"></script>
+</body>
+</html>

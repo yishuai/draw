@@ -14,7 +14,6 @@ class: middle, center
 - 过渡可以产生动画效果
 - 关键帧可以指定动画的起始、中间、结束位置
 - SVG可以用CSS设定动画
-- Javascript动画API使你可以用JS编程动画
 
 ---
 # 关键帧动画

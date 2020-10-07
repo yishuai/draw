@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Rocketeer - Parts</title>
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
+    <!--CSS & JS-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="jquery-3.4.1.min.js"></script>
+  </head>
+
+  <body="fade-out">
+    <script>document.body.className += 'fade-out';</script>
+    <!--Navigation bar-->
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <img src="assets/img/rocket_logo.png" id="logo" alt="word Rocketeer with rocket icon"/>
+      </a>
+      <div id="navlinks">
+        <a href="parts.html">
+          <div class="nav-element">Parts</div>
+        </a>
+        <a href="flight.html">
+          <div class="nav-element">Flight</div>
+        </a>
+      </div>
+    </nav>
+
+    <!--Background-->
+    <img src="assets/img/background-parts.png" id="background" alt="purple space scene with planets"/>
+
+    <div class="box">
+      <!--Base rocket-->
+      <div class="parts">
+        <img src="assets/img/rocket-base.png" id="base" alt="grey rocket body"/>
+        <img src="assets/img/payload.png" id="payload"/>
+        <img src="assets/img/electronics.png" id="elex"/>
+        <img src="assets/img/engines.png" id="engine"/>
+      </div>
+
+      <div id="starter">Click a part to learn more about it.</div>
+
+      <!--Clickable/hover content-->
+        <div class="hidden" id="nose">
+          <img src="assets/img/lines-nose.png" id="noseline"/>
+          <div class="nosecone-group">
+            <div id="part-header">NOSE CONE</div>
+          </div>
+        </div>
+        <div class="hidden" id="body">
+          <img src="assets/img/lines-body.png" id="bodyline"/>
+          <div class="bodycone-group">
+            <div id="part-header">BODY TUBE</div>
+            <div id="part-text">The frame of the rocket that keeps all the parts together, usually made of strong, lightweight materials (e.g. aluminum).</div>
+          </div>
+        </div>
+        <div class="hidden" id="fin">
+          <img src="assets/img/lines-fin.png" id="finline"/>
+          <div class="fin-group">
+            <div id="part-header">FINS</div>
+          </div>
+        </div>
+        <div class="hidden" id="pay">
+          <img src="assets/img/lines-pay.png" id="payline"/>
+          <div class="payload-group">
+            <div id="part-header">PAYLOAD</div>
+            <div id="part-text">The payload is the cargo of the rocket, which can be people, supplies, satellites, extra fuel, etc. In  some (model) rockets, the parachute is stored here. The weight of the payload is carefully calculated for optimal propellant storage and liftoff power.</div>
+          </div>
+        </div>
+        <div class="hidden" id="elec">
+          <img src="assets/img/lines-elex.png" id="elexline"/>
+          <div class="elex-group">
+            <div id="part-header">ELECTRONICS</div>
+            <div id="part-text">Includes the guidance system and other electronic parts that coordinate with software and various parts of the rocket.<br><br>This region is responsible for the steering and navigation of the rocket.</div>
+          </div>
+        </div>
+        <div class="hidden" id="eng">
+          <img src="assets/img/lines-engine.png" id="engline"/>
+          <div class="engine-group">
+            <div id="part-header">ENGINE SYSTEM</div>
+            <div id="part-text">Rocket engines are powered by a chemical reaction between the propellant and the oxidizer (gas, typically oxygen based, that can combine with the propellant) to releases energy. There are three main types of engine systems: solid, liquid, and hybrid. Solid engine systems use solid propellant, liquid systems use liquid propellants (stored in tanks, as pictured), and hybrid systems use a combination of liquid, solid, and gas fuel and oxidizer. The engine system also typically includes a combustion chamber where the reaction occurs.</div>
+          </div>
+        </div>
+    </div>
+    <!--Button to Flight page-->
+    <a href="flight.html">
+      <img src="assets/img/flight-button.png" id="flight-button"/>
+    </a>
+
+    <script src="assets/scripts/script.js"></script>
+  </body>
+</html>

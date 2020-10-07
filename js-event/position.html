@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+</head>
+<body>
+    <div id="container">
+        <p>X position: <span id="x-pos">537</span></p>
+        <p>Y position: <span id="y-pos">256</span></p>
+    </div>
+
+    <script>
+        const textX = document.getElementById('x-pos');
+        const textY = document.getElementById('y-pos');
+
+        function getPosition(event) {
+            let xPos = event.clientX;
+            let yPos = event.clientY;
+
+            textX.textContent = xPos;
+            textY.textContent = yPos;
+        }
+
+        window.addEventListener('mousemove', getPosition);
+    </script>
+</body>
+</html>

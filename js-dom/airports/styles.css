@@ -1,0 +1,86 @@
+/* web fonts */
+
+@font-face {
+  font-family: 'Junction Light';
+  src:
+    url('webfonts/junction-light.woff'),
+    url('webfonts/junction-light.ttf'),
+    url('webfonts/junction-light.svg'),
+    url('webfonts/junction-light.eot');
+}
+
+/*--- text and links ---*/
+
+h1, p {
+  font-family: 'Junction Light', Helvetica, sans-serif;
+  line-height: 140%;
+}
+
+a:link, a:visited {
+  color: #5385b8;
+  text-decoration: none;
+}
+
+a:hover, img.cloud:hover {
+  opacity: 0.5;
+}
+
+a:active, img.cloud:active {
+  opacity: 1;
+}
+
+/*--- layout ---*/
+
+#container {width: 100%;}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* so that child elements (cloud images) don’t stretch */
+}
+
+img.cloud {
+  width: calc(96% / 3);
+  height: auto;
+}
+
+img.airplane {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+p {margin-top: 10px;}
+
+/*--- media query ---*/
+
+@media (min-width: 960px) {
+  #container {
+    width: 940px;
+    margin: auto;
+  }
+
+  main {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  nav {
+    width: 140px;
+    height: 460px;
+    flex-direction: column; /* vertical axis */
+  }
+
+  img.cloud {width: 100%;}
+
+  img.airplane {
+    width: 460px;
+    height: 460px;
+    margin-top: 0;
+  }
+
+  p {
+    width: 300px;
+    margin-top: 0;
+  }
+}
