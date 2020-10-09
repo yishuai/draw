@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+</head>
+<body>
+    <p id="title"> 科蚪加油！</p>
+    <script>
+
+        tx = document.getElementById("title")
+
+        let bombTimer = setTimeout(
+            () => {
+                console.log("3秒后爆炸!");
+                tx.innerText = "3秒后爆炸!";
+                },
+            3000);
+
+        if (Math.random() < 0.5) {
+            // 50% 的机会
+            console.log("拆除成功!");
+            tx.innerText = "拆除成功!";
+            clearTimeout(bombTimer);
+        }
+
+    </script>
+</body>
+</html>

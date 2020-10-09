@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+</head>
+<body>
+    <p id="title"> 科蚪加油！</p>
+    <script>
+        let ticks = 0;
+        let clock = setInterval(
+            () => {
+                    console.log("滴答", ticks++);
+                    if (ticks == 10) {
+                        clearInterval(clock);
+                        console.log("停止.");
+                    }
+                },
+            1000);
+    </script>
+</body>
+</html>

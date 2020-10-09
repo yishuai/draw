@@ -5,7 +5,7 @@ Dark Mode for Seasons Home Page
 let hour = new Date().getHours(); // get current hour
 // console.log(hour); // display current hour in the web console
 
-if (hour >= 18 || hour < 6) { // between 6:00 PM and 6:00 AM
+if (hour >= 17 || hour < 6) { // between 6:00 PM and 6:00 AM
 // if (hour > 6) { // testing dark mode during the day
   const background = document.querySelector('body'); // access <body> element
   background.style.backgroundColor = 'black'; // change background color to white with style object
@@ -15,7 +15,7 @@ if (hour >= 18 || hour < 6) { // between 6:00 PM and 6:00 AM
   header.className = 'dark'; // apply class of "dark" (see style sheet)
 
   const navigation = document.querySelectorAll('nav > a'); // access <a> elements of primary navigation
-  
+
   navigation[0].className = 'dark'; // spring
   navigation[1].className = 'dark'; // summer
   navigation[2].className = 'dark'; // fall

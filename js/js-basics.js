@@ -2,16 +2,6 @@
 JavaScript Basics
 */
 
-function 幂(底数, 指数) {
-    if (指数 == 0) {
-        return 1;
-    } else {
-        return 底数 * 幂(底数, 指数 - 1);
-    }
-}
-
-幂(2,1)
-
 // 写入控制台
 console.log('你好!');
 
@@ -72,3 +62,14 @@ console.log(firstStudent);
 ||
 
 */
+
+// 递归
+function 幂(底数, 指数) {
+  if (指数 == 0) {
+    return 1;
+  } else {
+    return 底数 * 幂(底数, 指数 - 1);
+  }
+}
+
+幂(2, 1)

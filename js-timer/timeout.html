@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)http://i6.cims.nyu.edu/~jc3436/drawing/javascript/timing/set-timeout.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>JavaScript Timing: Set Timeout</title>
+    <style>
+      p {font-size: 4em;}
+    </style>
+</head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <p> 编程好玩吗？</p>
+
+    <script>
+      let text = document.querySelector('p');
+
+      function go() {
+        text.textContent += ' 好玩，Go!';
+      }
+
+      setTimeout(go, 2000);
+    </script>
+
+</body></html>

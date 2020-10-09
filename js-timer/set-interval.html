@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)http://i6.cims.nyu.edu/~jc3436/drawing/javascript/timing/set-interval.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>JavaScript Timing: Set Interval</title>
+    <style>
+      p {font-size: 4em;}
+    </style>
+</head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <p>34</p>
+
+    <script>
+      let text = document.querySelector('p');
+      let number = 0;
+
+      function count() {
+        number += 1;
+        text.textContent = number;
+      }
+
+      setInterval(count, 1000)
+    </script>
+
+</body></html>

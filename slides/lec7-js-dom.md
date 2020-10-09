@@ -18,6 +18,11 @@ class: middle, center
 - JavaScript可以通过设置style属性来修改元素样式
 
 ---
+class: middle, center
+
+# DOM树基本概念
+
+---
 # DOM Tree
 
 - DOM像一棵树一样组织，其中元素根据文档的结构分层排列
@@ -60,6 +65,70 @@ Every element, attribute, and piece of text in the HTML is represented by its ow
 ???
 
 示例文档的<body>标记不仅有3个子元素（<h1>和2个<p>元素），而且实际上有7个：这3个元素，以及它们之前，之后和之间的空格。
+
+---
+class: middle, center
+
+# DOM基本操作
+
+---
+# DOM操作：查找
+
+- 找到ID为"title"的HTML元素
+
+```js
+getElementById("title")
+```
+
+  - 类似JQuery的 $("#title")
+
+---
+# DOM操作：读取
+
+- 获得元素后，可以像JQuery一样，读取和设置它的各种属性
+- 如：读取元素的HTML内容
+
+```js
+var t = document.getElementById("title");
+t.innerHTML
+```
+
+- 也可以连着写，写为
+
+```js
+document.getElementById("title").innerHTML
+```
+
+---
+# DOM操作：设置
+
+- 可以设置元素的各种属性
+- 如：设置元素HTML内容
+
+```js
+t.innerHTML = "<h1>Hello</h1>";
+```
+
+- 也可以连着写，写为
+
+```js
+document.getElementById("title").innerHTML
+          = "<h1>Hello</h1>"
+```
+
+---
+# DOM操作：设置
+
+- 设置文本
+
+```js
+t.innerText = "<h1>Hello</h1>";
+```
+
+---
+class: middle, center
+
+# DOM关系和查找
 
 ---
 # 元素节点关系
@@ -118,9 +187,9 @@ We talk about the relationship between element nodes as “parents,” “childr
   - 对于第一个孩子，previousSibling 将为 null，对于最后一个孩子，nextSibling 将为 null。
 
 ---
-# 递归
+# 递归扫描DOM树
 
-- 扫描文档，查找包含“book”的文本节点
+- 扫描文档，查找包含“编程”的文本节点
   - 文本节点的nodeValue属性保存其表示的文本字符串。
 
 ```js
@@ -128,24 +197,22 @@ function talksAbout(node, string) {
   if (node.nodeType == Node.ELEMENT_NODE) {
     for (let child of node.childNodes) {
       if (talksAbout(child, string)) {
-        return true;}
-    }
+        return true;}}
     return false;
   } else if (node.nodeType == Node.TEXT_NODE) {
     return node.nodeValue.indexOf(string) > -1;}
 }
-
-console.log(talksAbout(document.body, "book"));
+console.log(talksAbout(document.body, "编程"));
 ```
 
+[DOM搜索示例](../js-dom/search.html)
 ---
-# 回顾：JQuery 动态编程
+class: middle, center
 
-- 电脑屏幕，点一下出现，再点一下，消失
-- 三个步骤
-  - $('#laptopscreen') 选择脚本要响应的元素
-  - .on('click') 指定事件 click 将触发响应
-  - function 定义了运行事件的代码
+# 事件响应编程入门
+
+---
+# 回顾：JQuery 事件响应编程
 
 ```js
 $('#laptopscreen').on(
@@ -155,48 +222,60 @@ $('#laptopscreen').on(
   });
 ```
 
+- 电脑屏幕，点一下出现，再点一下，消失
+- 三个步骤
+  - $('#laptopscreen') 选择脚本要响应的元素
+  - .on('click') 指定事件 click 将触发响应
+  - function 定义了运行事件的代码
+
 ---
 
 # Javascript 动态网页编程
 
 - 和JQuery差不多
 - 三个步骤
-  - 选择脚本要响应的元素
-  - 指定哪个事件将触发响应
-  - 运行事件的代码
+- 选择要响应的元素
+  - 比如”button“图片
+- 指定要响应的事件和函数
+  - 比如”click“点击
+- 实现响应该事件的函数
+  - 比如”更换图片()“
+
+[机场网页示例](../js-dom/airports/index.html)
 
 ---
 # 步骤1
 
-- 选择脚本要响应的元素
+- 选择要响应的元素
+  - 三个云的图标
   - querySelectorAll 查找所有类为 cloud 的元素
   - 类似JQuery的 $(".cloud")
 
 ```js
-let Images = document.querySelectorAll('.cloud');
+let 图片们 = document.querySelectorAll('.cloud');
 ```
 
 ---
 # 步骤2
 
-- 指定哪个事件将触发响应
+- 指定要响应的事件和函数
   - 为该元素添加click的响应函数
   - 类似JQuery的on函数
 
 ```js
-Images[0].addEventListener('click', lgaImage);
+图片们[0].addEventListener('click', 换图);
 ```
 
 ---
 # 步骤3
 
-- 运行事件的代码
+- 实现响应该事件的函数
   - 用户点击时，在函数中设置图像元素的src属性
   - 图像会立刻变化
   - JQuery里也是function，但不需要名字
 
 ```js
-function lgaImage() {
+function 换图() {
   mainImage.src = 'images/lga.jpg';
 }
 ```
@@ -205,9 +284,9 @@ function lgaImage() {
 # 总结
 
 - 步骤
-  - 选择脚本要响应的元素
-  - 指定哪个事件将触发响应
-  - 运行事件的代码
+  - 选择要响应的元素
+  - 指定要响应的事件和函数
+  - 实现响应该事件的函数
 
 ```js
 let Images = document.querySelectorAll('.cloud');
@@ -223,11 +302,31 @@ Images[0].addEventListener('click', lgaImage);
 https://github.com/jclayton/airports
 
 ---
+# 练习1：
+
+- 修改 [机场](../js-dom/airports/index.html)
+- 要求：用 数组 for 实现这个代码
+
+```js
+if (node.nodeType == Node.ELEMENT_NODE) {
+    for (let child of node.childNodes) {
+```
+
+- 修改示例，创建女工博物馆网站的一部分
+
+---
+class: middle, center
+
+# 高级DOM查询
+
+---
 
 # 第一步：DOM查询
 
 - 在DOM树中找到元素的JavaScript方法
 - DOM查询可能返回一个元素，也可能返回节点列表，里面包括多个元素
+
+[SVG 按钮变色](../js-dom/color/colors.html)
 
 ???
 
@@ -265,27 +364,41 @@ let link = document.body
 console.log(link.href);
 ```
 ---
-# 例：
+# querySelectorAll
+
+- 返回CSS选择器选中的元素
+  - 如果没有元素匹配，则返回null
 
 ```js
 let buttons = document
                 .querySelectorAll('svg.btn');
 let cyanBtn = buttons[0];
-
-let background = document.querySelector('body');
-
-background.style.backgroundColor = "cyan";
-
 ```
 
 [SVG 按钮变色](../js-dom/color/colors.html)
 
 ---
-# 实时变化
+# querySelector
+
+- 和querySelectorAll类似
+  - 返回CSS选择器选中的元素
+- 仅返回第一个匹配的元素
+  - 如果没有元素匹配，则返回null
+- 如果只想要一个特定的单个元素，则此选项很有用
+
+```js
+let background = document.querySelector('body');
+background.style.backgroundColor = "cyan";
+```
+
+[SVG 按钮变色](../js-dom/color/colors.html)
+
+---
+# 动态变化
 
 - getElementsByTagName等方法（或诸如childNodes之类的属性）返回的节点列表会实时反映网页的变化
   - 如果你用JS改变了网页，它也会随之改变
-- 如果您想要一个不变的节点集合（而不是实时节点），可以通过Array.from将集合转换为真实数组
+- 如果您想要一个不变的节点集合（而不是实时节点），可以通过 Array.from 将集合转换为真实数组
 
 ```js
 let arrayish = {0: "one", 1: "two", length: 2};
@@ -294,21 +407,42 @@ console.log(array.map(s => s.toUpperCase()));
 ```
 
 ---
-# CSS选择器
+# map操作 （高级）
+
+```js
+let arrayish = {0: "one", 1: "two", length: 2};
+let array = Array.from(arrayish);
+console.log(array.map(s => s.toUpperCase()));
+```
+
+- 对数组里的内容，逐个执行后面的函数
+
+---
+# 练习2：FCC函数式编程
+
+[练习](https://learn.freecodecamp.one/javascript-algorithms-and-data-structures/functional-programming)
+
+- 20道题，2个小时
+- 高能（请不要轻易尝试）
+
+---
+# 动态变化
 
 - 与getElementsByTagName之类的方法不同，querySelectorAll返回的对象不是实时的
   - 更改文档时不会更改
-- 但它仍然不是真正的数组，因此，仍需要调用Array.from。
-
-- querySelector方法（不包含All）的工作方式类似。如果您想要一个特定的单个元素，则此选项很有用。它将仅返回第一个匹配的元素；如果没有元素匹配，则返回null。
+  - 但它仍然不是真正的数组，因此，仍需要调用Array.from。
 
 ---
-# 修改文档
+class: middle, center
 
-- 删除
-  - 节点具有remove方法，可将其从当前父节点中删除
-- 添加
-  - 要将子节点添加到元素节点，可以使用appendChild（将其放在子列表的末尾），或使用insertBefore（将作为第一个参数指定的节点插入在作为第二个参数指定的节点之前）
+# 高级DOM操作
+
+---
+# 插入 insertBefore
+
+- insertBefore
+  - 两个参数
+  - 将第一个参数指定的节点插入第二个参数指定的节点之前
 
 ```html
 <p>One</p> <p>Two</p> <p>Three</p>
@@ -319,25 +453,40 @@ console.log(array.map(s => s.toUpperCase()));
 </script>
 ```
 
----
-# 移动节点
-
-- 一个节点只能在文档中的一个地方存在。
-- 在第一个段落的前面插入第三个段落将首先将其从文档末尾删除，然后将其插入到前面，得到第三个/一个/两个
-- 因此，所有在某个位置插入节点的操作都会导致将其从当前位置删除（如果有的话）
+[插入示例](../js-dom/dom-op.html)
 
 ---
-# 替换节点
+# 插入 insertBefore
 
-- replaceChild方法用于将一个子节点替换为另一个子节点
-- 它以两个节点为参数：新节点和要替换的节点
+- 插入操作会导致移动的节点从当前位置删除（如果有的话）
+  - 因为一个节点只能在文档中的一个地方存在。
+- 上例
+  - 在第一个段落的前面插入第三个段落将首先将其从文档末尾删除，然后将其插入到前面，得到第三个/一个/两个
+
+[插入示例](../js-dom/dom-op.html)
+
+---
+# 替换 replaceChild
+- 将一个子节点替换为另一个子节点
+  - 两个节点参数：新节点和要替换的节点
+  - 注意：replaceChild和insertBefore都将新节点作为其第一个参数
 - 替换的节点必须是调用该方法的元素的子元素
-- replaceChild和insertBefore都将新节点作为其第一个参数
 
 ---
-# 创建文本节点
+# 删除 remove
+
+- 节点具有remove方法，可将其从当前父节点中删除
+
+---
+# 附加 appendChild
+
+- 将子节点添加到元素节点，放在子列表的末尾
+
+---
+# 创建文本节点 createTextNode
 
 - document.createTextNode 方法创建文本节点
+- 例：如果图片image有alt属性的话，把图片节点，换为文本节点
 
 ```js
 if (image.alt) {
@@ -347,41 +496,40 @@ if (image.alt) {
 ```
 
 ---
-# 创建元素节点
+# 创建元素节点 createElement
 
-- document.createElement方法
-- 此方法采用标签名称，并返回给定类型的新空节点
+- document.createElement 方法
+- 输入标签名称，返回给定标签类型的新空节点
 
 ```js
 let node = document.createElement(type);
 ```
 
 ---
-# 设置和获得元素属性
+#  访问元素属性
 
-- getAttribute，setAttribute
+- 访问属性
+  - getAttribute 获得属性
+  - setAttribute 设置属性
+- 建议将此类虚构属性的名称加上data前缀，以确保它们不与任何其他属性冲突
 
 ```html
 <p data-classified="secret">a</p>
 
-<script>
-  let para = document.body
-        .getElementsByTagName("p")[0];
-  if (para.getAttribute("data-classified")
-        == "secret") {
+if (para.getAttribute("data-classified")
+    == "secret") {
       para.remove();
-  }
-</script>
+}
 ```
 
-- 建议将此类虚构属性的名称加上data前缀，以确保它们不与任何其他属性冲突
+[数据属性和节点删除示例](../js-dom/secret.html)
 
 ---
-# 设置Class
+# 设置Class属性
 
-- class是JavaScript语言中的关键字
 - 访问元素class属性，请用className
-- 可以使用getAttribute和setAttribute方法以其真实名称“class”访问它。
+  - class是JavaScript语言中的关键字，所以不能用
+- 如果用 getAttribute 和 setAttribute 方法访问，则可以用“class”
 
 ```js
 images[i].className = 'semitransparent';
@@ -390,19 +538,15 @@ images[i].className = 'semitransparent';
 [图片Class设置](../js-dom/opacity/opacity.html)
 
 ---
-# 设置ClassList
+# 练习3
 
-- 设置元素的classList，toggle（打开/关上）某个class
-
-```js
-document.getElementById(partID)
-        .classList.toggle('hidden');
-```
-
-[火箭说明书](../js-dom/rocket/index.html)
+- 研究 [图片Class设置](../js-dom/opacity/opacity.html) 代码
+- 进入浏览器的Debugger
+- 单步跟踪，看target
+- 改改代码
 
 ---
-# 示例
+# 设置Class属性
 
 - 根据时间，设置暗模式
 
@@ -417,31 +561,17 @@ if (hour >= 18 || hour < 6) {
 [动态暗模式网页](../js-dom/seasons/index.html)
 
 ---
-# 元素大小
+# toggle 设置 ClassList
 
-- offsetWidth 和 offsetHeight 属性为您提供元素占用的空间（以像素为单位）
-- clientWidth 和 clientHeight 给出元素内部空间的大小，而忽略边框宽度。
+- 设置元素的classList，toggle（打开/关上）某个class
 
-
-```html
-<p style="border: 3px solid red">
-  I'm a box </p>
-
-<script>
-  let para = document.body
-        .getElementsByTagName("p")[0];
-  console.log(para.clientHeight);
-  console.log(para.offsetHeight);
-</script>
+```js
+document.getElementById(partID)
+        .classList.toggle('hidden');
 ```
 
----
-# 元素位置
+[火箭说明书](../js-dom/rocket/index.html)
 
-- getBoundingClientRect 得到元素在屏幕上的精确位置
-  - 它返回一个具有 top，bottom，left 和 right 属性的对象，指示相对于屏幕左上角的元素侧面的像素位置
-- 如果希望它们相对于整个文档，则必须添加当前滚动位置
-  - pageXOffset 和 pageYOffset 中有滚动位置
 
 ---
 # 风格设置
@@ -461,7 +591,38 @@ if (hour >= 18 || hour < 6) {
   - style.fontFamily
 
 ---
-# 练习1：
+# 设置元素大小
+
+- offsetWidth 和 offsetHeight 属性
+  - 元素占用的空间（以像素为单位）
+- clientWidth 和 clientHeight
+  - 元素内部空间的大小，忽略边框宽度
+
+
+```html
+<p style="border: 3px solid red">
+  I'm a box </p>
+
+<script>
+  let para = document.body
+        .getElementsByTagName("p")[0];
+  console.log(para.clientHeight);
+  console.log(para.offsetHeight);
+</script>
+```
+
+[Box Size示例](../js-dom/box.html)
+
+---
+# 元素位置
+
+- getBoundingClientRect 得到元素在屏幕上的精确位置
+  - 它返回一个具有 top，bottom，left 和 right 属性的对象，指示相对于屏幕左上角的元素侧面的像素位置
+- 如果希望它们相对于整个文档，则必须添加当前滚动位置
+  - pageXOffset 和 pageYOffset 中有滚动位置
+
+---
+# 练习4：
 
 - 修改 [四季](../js-dom/seasons/index.html) 示例中的 js 文件，增加以下两种不同的显示风格
   - 修改 [四季](../js-dom/seasons/index.html) 示例中的 js 文件，增加以下两种不同的显示风格
@@ -469,7 +630,7 @@ if (hour >= 18 || hour < 6) {
   - 圣诞节显示风格不同
 
 ---
-# 练习2：编程建表
+# 练习5：编程建表
 
 - HTML表使用以下标记结构构建：
   - tr 代表行，th 表头，td 表内容
@@ -490,7 +651,7 @@ if (hour >= 18 || hour < 6) {
 ```
 
 ---
-# 练习2
+# 练习5
 
 - 给定一个山脉数据集，包含名称，高度和位置属性，自动生成表格的DOM结构
 - 每个键应具有一列
@@ -498,7 +659,7 @@ if (hour >= 18 || hour < 6) {
 - 每个对象应具有一行
 
 ---
-# 练习2
+# 练习5
 
 - .red[以下工作需要完全用Javascript代码完成]
 - 请用代码循环数据集，取第一个属性名称，作为列名
@@ -537,9 +698,7 @@ if (hour >= 18 || hour < 6) {
 - 将表添加到正确的父节点，可以使用 document.getElementById 或 document.querySelector 查找具有正确id属性的节点
 
 ---
-# 练习3：
-
-- 修改 [机场](../js-dom/airports/index.html) 示例，创建女工博物馆网站的一部分
+# 练习6：
 
 - 修改 [四季](../js-dom/seasons/index.html) 示例，创建女工博物馆网站的一部分
 

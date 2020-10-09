@@ -481,6 +481,52 @@ MDN JS 练习
 [MDN JS 练习](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
 
 ---
+# 在系列事件完成后再做
+
+- "mousemove", "scroll", “input” events 会一路fire
+- 不能在里面做太消耗CPU的事
+- 可以设置timeout，延时再做
+  - 在这个过程中，可以不断取消，直到用户停下来，再做
+
+```html
+<textarea>Type something here...</textarea>
+```
+
+---
+# 在系列事件完成后再做
+
+- 在用户输入过程，不断取消定时器，直到用户停下来，输出“终于敲完了”
+- 给clearTimeout提供一个未定义的值，或已触发的定时器，没有关系。因此，不必担心调用它时没有指定合适的定时器。调就行了。
+
+```js
+let texta = document.querySelector("textarea");
+let timeout;
+texta.addEventListener("input", () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(
+      () => console.log("终于敲完了!"), 500);
+    });
+```
+---
+# 在系列事件发生过程中定时做
+
+- 在事件持续过程中，以一定的响应间隔，做些事情
+- 例如，在用户“mousemove”过程中，每250毫秒，显示鼠标的当前坐标
+
+```js
+let scheduled = null;
+window.addEventListener("mousemove", event => {
+  if (!scheduled) {
+    setTimeout(() => {
+      document.body.textContent =
+        `鼠标在 ${scheduled.pageX}, ${scheduled.pageY}`;
+      scheduled = null;
+    }, 250);
+  }
+  scheduled = event; });
+```
+
+---
 
 # 练习1
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #frame {
+            width: 480px;
+            height: 480px;
+            border: 1px solid black;
+            position: relative;
+            /* just not static */
+            overflow: hidden;
+        }
+
+        #skater {
+            position: absolute;
+            top: -200px;
+            left: -200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="frame">
+        <img id="skater" src="skater.png" width="150" height="150"
+            alt="skateboarding" style="top: -37px; left: -37px;">
+    </div>
+
+    <script>
+        const skater = document.getElementById('skater');
+        let position = -200;
+        let animation = setInterval(skate, 4);
+
+        function skate() {
+            if (position < 480) { // while skater is in the frame
+                position += 1; // increment position by 1
+                skater.style.top = position + 'px'; // CSS top property
+                skater.style.left = position + 'px'; // CSS left property
+            } else {
+                position = -200; // return to starting point
+            }
+        }
+    </script>
+</body>
+</html>
