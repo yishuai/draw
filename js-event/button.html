@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+</head>
+<body>
+	<p> 科蚪加油！</p>
+
+	<button>金牌</button>
+	<button>银牌</button>
+	<button>铜牌</button>
+	<script>
+	 document.body.addEventListener("click",
+	   event => {
+	    if (event.target.nodeName == "BUTTON") {
+	      console.log("您点了", event.target.textContent);
+	    }
+	 });
+	</script>
+
+</body>
+</html>

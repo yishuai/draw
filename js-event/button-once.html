@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+</head>
+<body>
+	<p> 科蚪加油！</p>
+
+	<button>金牌</button>
+	<p id="note"></p>
+	<script>
+		let button = document.querySelector("button");
+		let note = document.querySelector("#note");
+		
+		function once() {
+		    console.log("Done.");
+		    alert('用户点击');
+		    note.textContent = "已点击一次！再点就没有反应了";
+		    button.removeEventListener("click", once);
+		}
+
+		button.addEventListener("click", once);
+
+	</script>
+
+</body>
+</html>

@@ -80,8 +80,6 @@ There are three different ways to bind an event to an element.
 
 ```html
 <button>A</button>
-<button>B</button>
-<button>C</button>
 <script>
  document.body.addEventListener("click",
    event => {
@@ -92,6 +90,7 @@ There are three different ways to bind an event to an element.
 </script>
 ```
 
+[按钮示例](../js-event/button.html)
 ---
 
 # 鼠标事件
@@ -123,8 +122,7 @@ There are three different ways to bind an event to an element.
 
 ```js
   let 按钮 = document.querySelector("button");
-  按钮.addEventListener("mousedown",
-    event => {
+  按钮.addEventListener("mousedown", event => {
       if (event.button == 0) {
         console.log("左键");
       } else if (event.button == 1)
@@ -133,6 +131,8 @@ There are three different ways to bind an event to an element.
         { console.log("右键"); }
   });
 ```
+
+[鼠标键示例](../js-event/mouse.html)
 
 ---
 # 鼠标位置
@@ -174,6 +174,8 @@ window.addEventListener("click",
     document.body.appendChild(dot);
 });
 ```
+
+[鼠标点击画点示例](../js-event/track.html)
 
 ---
 # 根据鼠标位置设置背景色
@@ -266,12 +268,9 @@ window.addEventListener("keydown",
   if (event.key == "v") {
    document.body.style.background = "violet"; }
 });
-window.addEventListener("keyup",
- event => {
-  if (event.key == "v") {
-    document.body.style.background = "";}
-});
 ```
+
+[按v换背景色](../js-event/key.html)
 
 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent)
 
@@ -302,7 +301,7 @@ function whichKey(event) {
 }
 ```
 
-[Key Code示例：暗模式](../js-event/morse/index.html)
+[按D进暗模式示例](../js-event/morse/index.html)
 
 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/code)
 
@@ -364,12 +363,10 @@ for (let field of Array.from(fields)) {
                     .getAttribute("data-help");
       help.textContent = text;
   });
-  field.addEventListener("blur",
-    event => {
-      help.textContent = "";
-  });
 }
 ```
+
+[用户输入焦点示例](../js-event/input.html)
 
 ---
 
@@ -462,8 +459,9 @@ squareWorker.postMessage(24);
     }
   button.addEventListener("click", once);
 </script>
-
 ```
+
+[按钮只能点击一次示例](../js-event/button-once.html)
 ---
 
 # DOM事件
@@ -499,7 +497,6 @@ MDN JS 练习
 - 给clearTimeout提供一个未定义的值，或已触发的定时器，没有关系。因此，不必担心调用它时没有指定合适的定时器。调就行了。
 
 ```js
-let texta = document.querySelector("textarea");
 let timeout;
 texta.addEventListener("input", () => {
     clearTimeout(timeout);
@@ -507,11 +504,14 @@ texta.addEventListener("input", () => {
       () => console.log("终于敲完了!"), 500);
     });
 ```
+
+[用户连续输入完成后再响应](../js-event/finish.html)
+
 ---
 # 在系列事件发生过程中定时做
 
 - 在事件持续过程中，以一定的响应间隔，做些事情
-- 例如，在用户“mousemove”过程中，每250毫秒，显示鼠标的当前坐标
+  - 例如，在用户“mousemove”过程中，每250毫秒，显示鼠标的当前坐标
 
 ```js
 let scheduled = null;
@@ -521,10 +521,11 @@ window.addEventListener("mousemove", event => {
       document.body.textContent =
         `鼠标在 ${scheduled.pageX}, ${scheduled.pageY}`;
       scheduled = null;
-    }, 250);
-  }
+    }, 250); }
   scheduled = event; });
 ```
+
+[鼠标移动过程中定期响应](../js-event/during-event.html)
 
 ---
 
@@ -569,7 +570,7 @@ window.addEventListener("mousemove", event => {
 
 # 练习2 鼠标路径元素
 
-- 创建一堆（比如10个）固定大小和背景颜色的绝对定位的<div>元素
+- 创建一堆（比如10个）固定大小和背景颜色的绝对定位的div元素
 - 鼠标移动时，会在鼠标指针之后不断显示它们，以显示鼠标的路径
 - 提示
   - 一种简单的解决方案是准备固定数量的元素

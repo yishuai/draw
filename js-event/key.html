@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+</head>
+<body>
+	<p> 科蚪加油！</p>
+
+	<button>金牌</button>
+	<button>银牌</button>
+	<button>铜牌</button>
+	<script>
+		window.addEventListener("keydown",
+		 event => {
+		  if (event.key == "v") {
+		   document.body.style.background = "violet"; }
+		   console.log(event.key)
+		});
+
+		window.addEventListener("keyup",
+		 event => {
+		  if (event.key == "v") {
+		    document.body.style.background = "";}
+		});
+
+	</script>
+
+</body>
+</html>

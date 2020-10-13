@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+</head>
+<body>
+	<p> 科蚪加油！</p>
+
+	<textarea>请随便输入一点东西</textarea>
+	<script>
+		
+		let texta = document.querySelector("textarea");
+		
+		let timeout;
+
+		texta.addEventListener(
+			"input",
+			() => {
+		    	clearTimeout(timeout);
+		    	timeout = setTimeout(
+			      () => console.log("终于敲完了!"), 2000);
+		    });
+	</script>
+
+</body>
+</html>
