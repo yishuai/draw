@@ -6,6 +6,10 @@
     <title>Drawing on the Web</title>
 </head>
 <body>
+    <p>
+        xx
+    </p>
+
     <div id="container">
         <p>X position: <span id="x-pos">537</span></p>
         <p>Y position: <span id="y-pos">256</span></p>
@@ -21,7 +25,10 @@
 
             textX.textContent = xPos;
             textY.textContent = yPos;
+            console.log('clienty', event.clientY)
+            console.log('clienty', event.clientY)
         }
+
 
         window.addEventListener('mousemove', getPosition);
     </script>

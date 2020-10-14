@@ -14,9 +14,13 @@
 	<script>
 		window.addEventListener("keydown",
 		 event => {
-		  if (event.key == "v") {
-		   document.body.style.background = "violet"; }
-		   console.log(event.key)
+		if (event.key == "v") {
+			if (event.key == "v" && event.ctrlKey) {
+				 console.log("继续!");
+				 document.body.style.background = "violet";
+				 console.log(event.key)
+				 }
+			}
 		});
 
 		window.addEventListener("keyup",
