@@ -175,6 +175,8 @@ context.strokeRect(150, 75, 200, 200);
 ---
 # Path2D
 
+- SVG Path
+
 ```js
 let path = new Path2D("
     M 20 40
@@ -412,19 +414,21 @@ window.addEventListener('resize',
 ---
 # 变换
 
-- 变换使您可以在多个方向上绘制形状
-- 可以在绘图上下文中进行转换：平移，缩放和旋转
-- 将影响所有后续绘图操作
-- 可使用save方法保存转换状态
-- 使用restore方法恢复转换状态
+- 平移，缩放和旋转
+  - 将影响所有后续绘图操作
+  - 使用save方法保存变换状态
+  - 使用restore方法恢复变换状态
 
 ```js
-context.scale(1.5, 1.5);
-context.translate(50, 0);
+context.save(); // 保存当前坐标系
+context.translate(50, 0); // 向右移动（对于SVG路径）
+context.fill(path); // 画出Path
+context.restore(); // 恢复坐标系
 ```
 
+[示例1](../canvas/14-compose.html)
 
-[示例](../canvas/canvas/5-canvas/14-compose.html)
+[示例2](../canvas/15-save-restore.html)
 
 ???
 Transformations allow you to draw a shape in multiple orientations. A 2D drawing context has a current transformation that can be changed with the translate, scale, and rotate methods. These will affect all subsequent drawing operations. A transformation state can be saved with the save method and restored with the restore method.
@@ -432,139 +436,150 @@ Transformations allow you to draw a shape in multiple orientations. A 2D drawing
 ---
 # 组合
 
-在之前的例子里面，我们总是将一个图形画在另一个之上，对于其他更多的情况，仅仅这样是远远不够的。比如，对合成的图形来说，绘制顺序会有限制。不过，我们可以利用 globalCompositeOperation 属性来改变这种状况。此外, clip属性允许我们隐藏不想看到的部分图形。
+- 之前例子里，总是将一个图形画在另一个上
+- 可利用 globalCompositeOperation 属性来改变
+  - 设定遮盖策略，12种遮盖方式
+- clip裁切
+  - 将当前正在构建的路径转换为当前的裁剪路径
+  - 隐藏不想看到的部分图形
 
-globalCompositeOperation = type
-这个属性设定了在画新图形时采用的遮盖策略，其值是一个标识12种遮盖方式的字符串。
+```js
+context.globalCompositeOperation = 'difference';
+```
 
-https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Compositing
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Compositing)
 
 [示例](../canvas/canvas/5-canvas/14-compose.html)
 
 ---
-# 裁切
-
-clip()
-将当前正在构建的路径转换为当前的裁剪路径。
-我们使用 clip()方法来创建一个新的裁切路径。
-
----
-# 保存恢复
-
-[示例](../canvas/15-save-restore.html)
-
----
 # 动画
 
-在 canvas 上绘制内容是用 canvas 提供的或者自定义的方法，而通常，我们仅仅在脚本执行结束后才能看见结果，比如说，在 for 循环里面做完成动画是不太可能的。
+- 定时重绘
+- 两种方法
+  - setInterval 和 setTimeout 定时重绘
+  - requestAnimationFrame（）方法非常适合画布动画
 
-因此， 为了实现动画，我们需要一些可以定时执行重绘的方法。有两种方法可以实现这样的动画操控。首先可以通过 setInterval 和 setTimeout 方法来控制在设定的时间点上执行重绘。
+---
+# 绘制步骤
 
-你可以通过以下的步骤来画出一帧:
+- 清除画布
+  - clearRect 清空 canvas 所有内容
+- 保存画布状态
+  - 如果要改变一些会改变 canvas 状态的设置（样式，变形之类的），又要在每画一帧之时都是原始状态的话，你需要先保存一下
+- 绘制动画形状
+- 恢复画布状态，重绘下一帧
 
-清空 canvas
-除非接下来要画的内容会完全充满 canvas （例如背景图），否则你需要清空所有。最简单的做法就是用 clearRect 方法。
-保存 canvas 状态
-如果你要改变一些会改变 canvas 状态的设置（样式，变形之类的），又要在每画一帧之时都是原始状态的话，你需要先保存一下。
-绘制动画图形（animated shapes）
-这一步才是重绘动画帧。
-恢复 canvas 状态
-如果已经保存了 canvas 的状态，可以先恢复它，然后重绘下一帧。
+---
+# 示例
 
-由于使用JavaScript来控制画布，因此也很容易将其用于动画
-基本步骤如下：
-1.清除画布
-2.保存画布状态
-3.绘制动画形状
-4.恢复画布状态
+[示例1](../canvas/14-animation.html)
 
-requestAnimationFrame（）方法非常适合画布动画
 
-采用 window.requestAnimationFrame()实现动画效果。这个方法提供了更加平缓并更加有效率的方式来执行动画，当系统准备好了重绘条件的时候，才调用绘制动画帧。一般每秒钟回调函数执行60次，也有可能会被降低。想要了解更多关于动画循环的信息，尤其是游戏，可以在Game development zone 参考这篇文章 Anatomy of a video game。
+[示例2](../canvas/16-animation-transform.html)
 
-最大的限制就是图像一旦绘制出来，它就是一直保持那样了。如果需要移动它，我们不得不对所有东西（包括之前的）进行重绘。重绘是相当费时的，而且性能很依赖于电脑的速度。
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_animations)
 
-When showing an animation on a canvas, the clearRect method can be used to clear part of the canvas before redrawing it.
+---
+# 限制
 
-requestAnimationFrame(draw);
-
-[示例](../canvas/14-animation.html)
-
-https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_animations
-
-[示例](../canvas/16-animation-transform.html)
+- 图像一旦绘制出来，就一直保持那样了
+- 如果需要移动它，不得不对所有东西（包括之前的）进行重绘
+- 重绘相当费时，性能很依赖于电脑的速度
 
 ---
 # 视频处理
 
+- play播放视频
+
 ```js
-context.drawImage(video, 0, 0, 533, 300);
-requestAnimationFrame(draw);
+video.play();
+
+function draw() {
+    context.drawImage(video, 0, 0, 533, 300);
+    requestAnimationFrame(draw);
+}
+
+video.addEventListener('play', draw);
 ```
 
-[示例](../canvas/15-video.html)
-[示例](../canvas/16-video.html)
+[示例1](../canvas/15-video.html)
+
 ---
-# 视频处理（特性）
+# 视频处理（特效）
 
-[示例](../canvas/15-video-effect.html)
-[示例](../canvas/16-video-effect.html)
+```js
+// video image processing
+for (let i = 0; i < data.length; i += 4) {
+  data[i] = data[i + (canvas.width * 4 / 3)];
+  data[i + 1]
+    = data[i + 1 + (canvas.width * 4 / 1.5)];
+  data[i + 2]
+    = data[i + 2 + (canvas.width * 4)];
+}
+```
 
-https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Manipulating_video_using_canvas
+[示例1](../canvas/15-video-effect.html)
+
+[示例2](../canvas/16-video-effect.html)
+
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Manipulating_video_using_canvas)
 
 ---
 # 视频和SVG
+
+```js
+// SVG path data for each video pixel
+let path = new Path2D("M 20 40 L 100 20 L 175 125 L 120 180 z");
+// 柔光复合
+context.globalCompositeOperation = 'soft-light';
+context.fill(path);
+```
 
 [示例](../canvas/16-video-svg.html)
 
 ---
 # 注意
 
-canvas API为Web浏览器中的栅格图形打开了各种可能性
-但是请注意，绘制到画布上的像素数据不是DOM元素
-这意味着画布的区域不能以与SVG图像的区域可以相同的方式进行交互
-请记住这些技术如何相交以及它们如何相异
+- 绘制到画布上的像素数据不是DOM元素
+- 画布区域不能以与SVG图像区域相同的方式进行交互
 
 ---
 # 参考
 
-https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API
+[MDN Canvas API](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API)
 
-https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial
-
----
-# 练习
-
-https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_animations
-
-上的动画
-
-- 太阳系的动画
-- 动画时钟
-- 循环全景照片
-- Snake Game
+[MDN 入门指南](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial)
 
 ---
-# 练习
+# 练习1
 
-https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Advanced_animations
-
-- 弹球
+- [MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_animations) 上的动画
+  - 太阳系的动画
+  - 动画时钟
+  - 循环全景照片
+  - Snake Game
 
 ---
-# 练习
+# 练习2
+
+- [MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Advanced_animations)上的高级动画
+  - 弹球
+
+---
+# 练习3
+
+- 创建一个HTML画布图形
+- 每个画布为600×400（CSS）像素
+- 使用窗口对象的devicePixelRatio属性来缩放
+- 应包括使用canvas API的path方法绘制的自定义形状
+- 应由ImageData对象处理的图像或视频
+- 每个画布绘图都应使用窗口对象的requestAnimationFrame（）方法生成动画
+- 用JavaScript更新页面标题和画布元素的背景色
+
+???
 
 Using this template, create a series of three HTML canvas drawings that relate to each other, either thematically or aesthetically. Each canvas is 600 × 400 (CSS) pixels. Use the window object’s devicePixelRatio property to scale the resolution for the different pixel densities of different screens.
 
 At least one drawing should include a custom shape drawn with path methods of the canvas API. At least one drawing should include a photographic image or video whose pixel data is manipulated with the ImageData object. Each of the canvas drawings should be visibly animated with the window object’s requestAnimationFrame() method.
 
 Write your JavaScript externally, linked to the HTML page. Update the title of the page and the background color of the canvas elements.
-
----
-# 要求
-
-Three unique canvas drawings coded into the template provided (3 points)
-Drawing resolution should be scaled appropriately with the devicePixelRatio property (1 point)
-At least one custom shape drawn with path methods (1 point)
-At least one photographic image or video with pixel manipulation (2 points)
-Each drawing should be animated with the requestAnimationFrame() method (3 points)
