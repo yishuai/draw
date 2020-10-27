@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)http://i6.cims.nyu.edu/~jc3436/drawing/canvas/basics/paths.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Drawing Paths</title>
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+</head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <canvas id="drawing" width="450" height="300"></canvas>
+
+    <script>
+      const canvas = document.getElementById('drawing');
+      const context = canvas.getContext('2d'); // two-dimensional drawing
+
+      // x, y start; x, y stop
+      let gradient = context.createLinearGradient(100, 50, 350, 250);
+      gradient.addColorStop(0, 'orange');
+      gradient.addColorStop(1, 'purple');
+
+      context.fillStyle = gradient;
+      context.beginPath();
+      context.moveTo(225, 50);
+      context.lineTo(100, 250);
+      context.lineTo(350, 250);
+      context.closePath();
+      context.stroke();
+      context.fill();
+
+      context.strokeStyle = 'green';
+      context.fillStyle = 'rgba(255, 165, 0, 0.3)';
+
+      context.beginPath();
+      // x, y, radiusX, radiusY, rotation, startAngle, endAngle, counterclockwise (optional)
+      context.ellipse(canvas.width/2, canvas.height/2, 100, 100, 0, 0, 2 * Math.PI, false);
+      context.stroke();
+      context.fill();
+
+      context.strokeStyle = 'purple';
+
+      context.beginPath();
+      // x, y, r, start, stop, counterclockwise (optional)
+      context.arc(canvas.width/2, canvas.height/2, 125, 0, 4);
+      context.stroke();
+    </script>
+
+<div id="kap-modal-anchor"><div></div></div><script type="text/javascript" src="chrome-extension://mbphcbmclhpjpdidjkgakgmdecfpkjhm/inject.js"></script><div id="popover-box" style="z-index: 33333; position: absolute;"></div><div id="kap-sidebar-root"></div></body></html>

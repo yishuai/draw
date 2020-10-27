@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)http://i6.cims.nyu.edu/~jc3436/drawing/canvas/basics/rectangles.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Drawing Rectangles</title>
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <canvas id="drawing" width="450" height="300"></canvas>
+
+    <script>
+      const canvas = document.getElementById('drawing');
+      const context = canvas.getContext('2d'); // two-dimensional drawing
+
+      context.moveTo(0, 0); // start at top left corner (x, y)
+      context.lineTo(canvas.width, canvas.height); // line to bottom right corner
+      context.stroke(); // draw line
+
+      context.fillStyle = 'rgba(0, 255, 200, 0.5)';
+      context.fillRect(100, 25, 200, 200);
+
+      context.clearRect(125, 50, 200, 200);
+
+      context.strokeStyle = 'rgb(255, 200, 0)';
+      context.strokeRect(150, 75, 200, 200);
+    </script>
+
+</body></html>

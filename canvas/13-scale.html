@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)http://i6.cims.nyu.edu/~jc3436/drawing/canvas/basics/loops-scaled.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Drawing with Loops, Scaled for Pixel Density</title>
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <canvas id="drawing" width="450" height="300" style="width: 450px; height: 300px;"></canvas>
+
+    <script>
+      const canvas = document.getElementById('drawing');
+      const context = canvas.getContext('2d'); // two-dimensional drawing
+
+      const referenceWidth = 450;
+      const referenceHeight = 300;
+
+      // Set display size (CSS pixels)
+      canvas.style.width = referenceWidth + 'px';
+      canvas.style.height = referenceHeight + 'px';
+
+      // Set actual, device pixel size (scaled for extra pixel density)
+      let scale = window.devicePixelRatio;
+      console.log(scale);
+      canvas.width = referenceWidth * scale;
+      canvas.height = referenceHeight * scale;
+
+      // Normalize coordinate system to use CSS pixels
+      context.scale(scale, scale);
+
+      let x = 25;
+      let y = 25;
+
+      let spacing = 50;
+      let radius = 20;
+
+      let alpha = 1;
+      let red = 255;
+      let green = 0;
+      let blue = 255;
+
+      for (let row = 0; row < referenceHeight; row += spacing) {
+        for (let col = 0; col < referenceWidth; col += spacing) {
+          context.beginPath();
+          context.ellipse(x, y, radius, radius, 0, 0, 2 * Math.PI);
+          context.strokeStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + alpha + ')';
+          context.stroke();
+          green += 4;
+          blue -= 4;
+          x += spacing;
+        }
+        x = 25;
+        y += spacing;
+      }
+    </script>
+
+<div id="kap-modal-anchor"><div></div></div><script type="text/javascript" src="chrome-extension://mbphcbmclhpjpdidjkgakgmdecfpkjhm/inject.js"></script><div id="popover-box" style="z-index: 33333; position: absolute;"></div><div id="kap-sidebar-root"></div></body></html>

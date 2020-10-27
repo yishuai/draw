@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)http://i6.cims.nyu.edu/~jc3436/drawing/canvas/translate-rotate.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Animation with Translate and Rotate</title>
+
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+      }
+
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+</head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <canvas id="drawing" width="450" height="300" style="width: 450px; height: 300px;"></canvas>
+
+    <script>
+      const canvas = document.getElementById('drawing');
+      const context = canvas.getContext('2d');
+
+      let width;
+      let height;
+
+      function setup() {
+        // fixed canvas size
+        width = canvas.width;
+        height = canvas.height;
+
+        // set the CSS display size
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        // set the number of display pixels, scaled for device resolution
+        let scale = window.devicePixelRatio;
+        canvas.width = width * scale;
+        canvas.height = height * scale;
+
+        // normalize the coordinate system
+        context.scale(scale, scale);
+      }
+
+      let angle = 0;
+
+      function draw() {
+        context.clearRect(0, 0, width, height);
+
+        context.save();
+        // rectangle rotates from center point
+        context.translate(width/2, height/2);
+        context.rotate((Math.PI / 180) * angle);
+        context.fillRect(-100, -100, 200, 200);
+        context.restore();
+        angle += 3;
+
+        requestAnimationFrame(draw);
+      }
+
+      setup();
+
+      draw();
+    </script>
+
+</body></html>

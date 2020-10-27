@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)http://i6.cims.nyu.edu/~jc3436/drawing/canvas/canvas-setup.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>HTML Canvas Setup</title>
+
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+      }
+
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+</head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <canvas id="drawing" width="450" height="300" style="width: 450px; height: 300px;"></canvas>
+
+    <script>
+      const canvas = document.getElementById('drawing');
+      const context = canvas.getContext('2d');
+
+      let width;
+      let height;
+
+      function setup() {
+        // 固定画布大小
+        width = canvas.width;
+        height = canvas.height;
+
+        // 设置CSS显示大小
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        // 设置画布像素数，根据屏幕分辨率缩放
+        let scale = window.devicePixelRatio;
+        canvas.width = width * scale;
+        canvas.height = height * scale;
+
+        // 标准化坐标系
+        context.scale(scale, scale);
+      }
+
+      function draw() {
+        // 画在画布上
+      }
+
+      setup();
+      draw();
+    </script>
+
+</body></html>

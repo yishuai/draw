@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Drawing on the Web</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+<body>
+
+	<p style="text-align: center">
+	  <img src="skater.png" style="position: relative">
+	</p>
+
+    <script>
+	  let cat = document.querySelector("img");
+	  let angle = Math.PI / 2;
+	  function animate(time, lastTime) {
+	    if (lastTime != null) {
+	      angle += (time - lastTime) * 0.001;
+	    }
+	    cat.style.top = (Math.sin(angle) * 200) + "px";
+	    cat.style.left = (Math.cos(angle) * 200) + "px";
+	    requestAnimationFrame(newTime => animate(newTime, time));
+	  }
+	  requestAnimationFrame(animate);
+    </script>
+</body>
+</html>

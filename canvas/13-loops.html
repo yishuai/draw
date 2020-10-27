@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)http://i6.cims.nyu.edu/~jc3436/drawing/canvas/basics/loops.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Drawing with Loops</title>
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+</head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <canvas id="drawing" width="450" height="300"></canvas>
+
+    <script>
+      const canvas = document.getElementById('drawing');
+      const context = canvas.getContext('2d'); // two-dimensional drawing
+
+      let x = 25;
+      let y = 25;
+
+      let spacing = 50;
+      let radius = 20;
+
+      let alpha = 1;
+      let red = 255;
+      let green = 0;
+      let blue = 255;
+
+      for (let row = 0; row < canvas.height; row += spacing) {
+        for (let col = 0; col < canvas.width; col += spacing) {
+          context.beginPath();
+          context.ellipse(x, y, radius, radius, 0, 0, 2 * Math.PI);
+          context.strokeStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + alpha + ')';
+          context.stroke();
+          green += 4;
+          blue -= 4;
+          x += spacing;
+        }
+        x = 25;
+        y += spacing;
+      }
+    </script>
+
+</body></html>

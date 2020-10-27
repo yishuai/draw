@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)http://i6.cims.nyu.edu/~jc3436/drawing/canvas/canvas-gradient.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Canvas Pixel Gradient</title>
+
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+</head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <canvas id="drawing" width="1920" height="897" style="width: 1920px; height: 897px;"></canvas>
+
+    <script>
+      const canvas = document.getElementById('drawing');
+      const context = canvas.getContext('2d');
+
+      let width;
+      let height;
+
+      function setup() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+
+        // set the CSS display size
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        // set the number of display pixels, scaled for device resolution
+        var scale = window.devicePixelRatio;
+        canvas.width = width * scale;
+        canvas.height = height * scale;
+
+        // normalize the coordinate system
+        context.scale(scale, scale);
+      }
+
+      function draw() {
+        let pixels = context.getImageData(0, 0, canvas.width, canvas.height);
+        let pixelData = pixels.data;
+        // console.log(pixelData.length);
+
+        for (let y = 0; y < canvas.height; y++) { // for every row
+          for (let x = 0; x < canvas.width; x++) {
+            let index = (x + y * canvas.width) * 4; // index position of every pixel
+            pixelData[index + 0] = 255; // red
+            pixelData[index + 1] = (x / canvas.width) * 255; // green
+            pixelData[index + 2] = (y / canvas.height) * 255; // blue
+            pixelData[index + 3] = 255; // alpha
+          }
+        }
+
+        context.putImageData(pixels, 0, 0);
+      }
+
+      setup();
+
+      draw();
+
+      window.addEventListener('resize', function() {
+        setup();
+        draw();
+      });
+    </script>
+
+</body></html>

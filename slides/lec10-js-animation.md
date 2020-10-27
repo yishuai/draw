@@ -1,6 +1,6 @@
 class: middle, center
 
-# 定时器
+# JS动画
 
 陈一帅
 
@@ -11,97 +11,119 @@ class: middle, center
 ---
 # 介绍
 
----
-# 动画API
-
-web动画API可以让我们用JavaScript写动画并且控制动画。
+- Web动画API
+- 用JavaScript写并控制动画
 
 ---
 # 关键帧对象
 
-首先要做的是创建一个对应于我们的CSS @keyframes块的关键帧对象:
+- 首先创建一个对应于CSS @keyframes 的关键帧对象
+  - 对象数组。每个对象代表原始CSS中的一个键
+  - 默认等间隔，也可以指定偏移量
 
-// keyframe object
+```js
 let movement = [
     { top: '-200px', left: '-200px' },
     { top: '480px', left: '480px' }
 ];
-
-使用一个包含多个对象的数组。 每个对象代表原始CSS中的一个键。
-
-除非你指定一个键上的偏移量，否则键的默认值是等间隔的
-不需要明确地告知每个键出现的动画的百分比。 它将根据您给出的按键数量自动将动画划分为相等的部分。
-
-当我们想要明确地设置一个键与其他键的偏移量时，我们可以直接在对象中指定一个偏移量，并与逗号分隔。
-
-var aliceTumbling = [
-  { transform: 'rotate(0) translate3D(-50%, -50%, 0)', color: '#000' },
-  { color: '#431236', offset: 0.3},
-  { transform: 'rotate(360deg) translate3D(-50%, -50%, 0)', color: '#000' }
-];
-
+```
 ---
 # 时间属性
 
+- 持续时间是毫秒，不是秒：3000是3秒
+- 重复次数是iterations, 不是iteration-count
+- 无穷多次是Infinity，不是 “infinity”
+
+```js
 // timing object
-let skateTiming = { duration: 3000, iterations: Infinity };
-
-持续时间是毫秒，而不是秒 - 3000不是3秒
-
-是iterations, 不是iteration-count.
-
-是Infinity，不是 “infinity”
-
-{
-  fill: 'forwards',
-  easing: 'steps(4, end)',
-  duration: aliceChange.effect.timing.duration / 2
-}
+let skateTiming = {
+    duration: 3000,
+    iterations: Infinity
+    };
+```
 
 ---
 # 整合这些特性
 
+```js
 // put together with the animate method
 let skate = skater.animate(
     movement,
     skateTiming
 )
+```
 
-js/animation/api.html
+[Example](../js-animation/api.html)
 
-https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API
-
----
-# 仅指定持续时间
-
-我们只想指定动画的持续时间，而不是其迭代（默认动画迭代一次），我们可以单独传递毫秒：
-
-let skate = skater.animate(
-    movement,
-    3000
-)
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API)
 
 ---
 # 操纵动画的播放
 
-skate.pause();
+- skate.play() 开始
+- skate.pause() 暂停
+- skate.finish() 结束
+- skate.cancel() 取消
+- 倒退
+  - 设置动画播放速度到负值，所以它向后运行
+  - skate.playbackRate = -1
+  - skate.reverse()
 
-skate.play();
+[Example](../js-animation/api.html)
 
-Animation.finish() 动画结束
+---
+# 仅指定持续时间
 
-Animation.cancel() 终止动画
+- 指定动画持续时间，而不是其重复次数（默认动画迭代一次）
+- 毫秒
 
-Animation.reverse() 设置动画播放速度到负值，所以它向后运行
+```js
+let skate = skater.animate(
+    movement,
+    3000
+)
+```
 
-skate.playbackRate = -1
+[Example](../js-animation/api.html)
+
+---
+# 更多动画属性
+
+```js
+{
+  fill: 'forwards',
+  easing: 'steps(4, end)',
+  duration:
+    aliceChange.effect.timing.duration / 2
+}
+```
+
+---
+# 指定偏移量
+
+- 用offset明确设置一个键与其他键的偏移
+
+```js
+var aliceTumbling = [
+  { transform: 'rotate(0)
+        translate3D(-50%, -50%, 0)',
+    color: '#000' },
+  { color: '#431236', offset: 0.3},
+  { transform: 'rotate(360deg)
+        translate3D(-50%, -50%, 0)',
+    color: '#000' }
+];
+```
 
 ---
 
-# 例：动画控制
+# 设置CSS Style，进行动画控制
 
+```html
 <button type="button" id="play">开始</button>
+```
 
+```js
 let playBtn = document.getElementById('play');
 
 playBtn.addEventListener('click', play);
@@ -110,193 +132,239 @@ let cube = document.querySelector('.cube');
 
 cube.style.animationPlayState = 'running';
 
-[Cubic控制](../js/animation/cubic.html)
+cube.style.animationPlayState = 'paused';
+```
+
+[Cubic控制](../js-animation/cubic.html)
 
 ---
 
 # 例：动画事件
-
-cube.addEventListener('animationstart', animationData);
-
-if (event.type == "animationstart") {
-                animationStatus.textContent = '动画开始';
+```js
+function animationData(event) {
+  if (event.type == "animationstart") {
+    animationStatus.textContent = '动画开始啦';
+  } else if (event.type == 'animationiteration') {
+    iteration += 1;
+    animationStatus.textContent = '动画重复次数: '
+      + iteration;
+  }
+}
+cube.addEventListener('animationstart',
+  animationData);
+cube.addEventListener('animationiteration',
+  animationData);
+```
 
 [Cubic控制](../js/animation/cubic.html)
 
 ---
-# 动画
+# 设置CSS Style 动画，进行动画控制
 
-object.style.animation = "name duration timingFunction delay iterationCount direction fillMode playState"
+```js
+object.style.animation = "
+  name 名称
+  duration 时长
+  timingFunction  定时
+  delay 延时
+  iterationCount  循环次数
+  direction 方向
+  fillMode 填充模式
+  playState"  播放状态
+```
 
-https://www.w3schools.com/jsref/prop_style_animation.asp
+[W3School](https://www.w3schools.com/jsref/prop_style_animation.asp)
 
 ---
-# 过渡
+# 设置CSS Style 过渡，进行动画控制
 
-object.style.transition = "property duration timing-function delay|initial|inherit"
+```js
+object.style.transition = "
+  property 属性
+  duration 时长
+  timing-function delay|initial|inherit"
+```
 
-https://www.w3schools.com/jsref/prop_style_transition.asp
-
+[W3School](https://www.w3schools.com/jsref/prop_style_transition.asp)
 
 ---
-# 鼠标位置控制旋转变换
+# 设置CSS Style 变换，进行动画控制
+
+```js
+
+let xRotation = 60 - Math.ceil(yPos / yBrowserRatio);
 
 squares[i].style.transform = 'rotateX(' + xRotation + 'deg)' + ' ' + 'rotateY(' + yRotation + 'deg)';
+```
 
-网格形状的动态变换
-- 映射到光标移动
-- 缩放到浏览器窗口
+- 网格形状的动态变换
+  - 映射到光标移动
+  - 缩放到浏览器窗口
 
-js/animation/dynamic-grid/grid.html
+[例：鼠标位置控制旋转变换](../js-animation/dynamic-grid/grid.html)
 
 ---
-#
+# 请求动画帧，实现动画
 
-window.requestAnimationFrame() 告诉浏览器——你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行
+- window.requestAnimationFrame()
+  - 要求浏览器在下次重绘之前调用指定的回调函数更新动画
+  - 传入回调函数，该函数会在浏览器下一次重绘之前执行
+  - 动画 skate 函数会在浏览器准备重绘屏幕时运行
 
+```js
 let animation = requestAnimationFrame(skate);
-
 function skate() {
     animation = requestAnimationFrame(skate);
-    skater.style.top = position + 'px'; // CSS top property
-    skater.style.left = position + 'px'; // CSS left property
+    skater.style.top = position + 'px';
+```
 
-cancelAnimationFrame(animation); // cancel requestAnimationFrame()
+[Example](../js-animation/animation-frame.html)
 
-js/animation/animation-frame.html
-
-https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame)
 
 ---
-# 调用频率
+# 请求动画帧，实现动画
 
-当你准备更新动画时你应该调用此方法。这将使浏览器在下一次重绘之前调用你传入给该方法的动画函数(即你的回调函数)。
+- skate 动画函数本身再次调用 requestAnimationFrame 安排下一次更新
+  - 当浏览器窗口（或选项卡）处于活动状态时，这将导致更新以每秒约60的速度发生，这往往会产生很漂亮的动画
+  - 通常是每秒执行60次（与浏览器屏幕刷新次数匹配）
 
-回调函数执行次数通常是每秒60次
+```js
+let animation = requestAnimationFrame(skate);
+function skate() {
+    animation = requestAnimationFrame(skate);
+    skater.style.top = position + 'px';
+```
 
-但在大多数遵循W3C建议的浏览器中，回调函数执行次数通常与浏览器屏幕刷新次数相匹配。
+[Example](../js-animation/animation-frame.html)
 
-为了提高性能和电池寿命，因此在大多数浏览器里，当requestAnimationFrame() 运行在后台标签页或者隐藏的<iframe> 里时，requestAnimationFrame() 会被暂停调用以提升性能和电池寿命。
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame)
+
+---
+# 为什么
+
+- 为什么要用 requestAnimationFrame
+  - 使浏览器知道我们现在已经完成，并且可以继续执行浏览器所要做的事情，例如更新屏幕和响应用户操作
+  - 如果我们只是循环更新DOM，则页面将冻结，并且屏幕上不会显示任何内容。
+  - 浏览器不会在JavaScript程序运行时更新其显示，也不允许与页面进行任何交互
+
+---
+# 好处
+
+- 提升性能和电池寿命
+  - 大多数浏览器里，当requestAnimationFrame() 运行在后台标签页或者隐藏的 iframe 里时，requestAnimationFrame() 会被暂停调用
 
 ---
 # 取消
 
-取消一个先前通过调用window.requestAnimationFrame()方法添加到计划中的动画帧请求.
+```js
+cancelAnimationFrame(animation);
+```
 
-https://developer.mozilla.org/zh-CN/docs/Web/API/Window/cancelAnimationFrame
+- 取消一个先前通过调用window.requestAnimationFrame()方法添加到计划中的动画帧请求
 
----
-#
-
-显示椭圆形移动的猫的图片：
-
-图片以页面为中心，相对位置。
-
-反复更新该图片的顶部和左侧样式以将其移动
-
-<p style="text-align: center">
-  <img src="img/cat.png" style="position: relative">
-</p>
-<script>
-  let cat = document.querySelector("img");
-  let angle = Math.PI / 2;
-  function animate(time, lastTime) {
-    if (lastTime != null) {
-      angle += (time - lastTime) * 0.001;
-    }
-    cat.style.top = (Math.sin(angle) * 20) + "px";
-    cat.style.left = (Math.cos(angle) * 200) + "px";
-    requestAnimationFrame(newTime => animate(newTime, time));
-  }
-  requestAnimationFrame(animate);
-</script>
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/cancelAnimationFrame)
 
 ---
-#
+# 例：以椭圆曲线移动图片
 
-用requestAnimationFrame安排动画animate函数在浏览器准备重绘屏幕时运行。
-animate动画函数本身再次调用requestAnimationFrame安排下一次更新
-当浏览器窗口（或选项卡）处于活动状态时，这将导致更新以每秒约60的速度发生，这往往会产生很漂亮的动画。
+- 图片以页面为中心，相对位置
+- 反复更新该图片的顶部和左侧样式以将其移动
 
-如果我们只是循环更新DOM，则页面将冻结，并且屏幕上不会显示任何内容。
-浏览器不会在JavaScript程序运行时更新其显示，也不允许与页面进行任何交互。
-这就是为什么我们需要requestAnimationFrame的原因-它使浏览器知道我们现在已经完成，并且可以继续执行浏览器所要做的事情，例如更新屏幕和响应用户操作。
+```js
+let angle = Math.PI / 2;
+function animate(time, lastTime) {
+  if (lastTime != null) {
+    angle += (time - lastTime) * 0.001; }
+  cat.style.top = (Math.sin(angle) * 200) + "px";
+  cat.style.left = (Math.cos(angle) * 200) + "px";
+  requestAnimationFrame(
+      newTime => animate(newTime, time));
+}
+```
 
-animate动画函数的参数是当前时间time。
-为确保猫每毫秒的运动稳定，它以角度变化的速度为基础，
-该时间是当前时间与最后一次运行之间的差值。
-
-如果仅以每步固定的角度移动角度，则例如在同一台计算机上运行的另一项繁重的任务要阻止此功能运行几分之一秒时，该动作将停顿。
-
----
-# 练习
-
-扩展先前定义的猫动画，使猫和他的帽子（<img src =“ img /hat.png”>）沿着椭圆，在相反的方向旋转。
-
-或使帽子绕猫转一圈。或以其他有趣的方式更改动画。
-
-为了使定位多个对象更容易，最好切换到绝对定位。这意味着顶部和左侧是相对于文档的左上角计算的。为避免使用负坐标，这将导致图像移至可见页面之外，可以向位置值添加固定数量的像素。
+[Example](../js-animation/animation-frame-2.html)
 
 ---
-# 起始代码
+# 例：以椭圆曲线移动图片
 
-<style>body { min-height: 200px }</style>
-<img src="img/cat.png" id="cat" style="position: absolute">
-<img src="img/hat.png" id="hat" style="position: absolute">
+- 回调函数的输入参数
+  - 动画函数会被传入 DOMHighResTimeStamp 参数，该参数与 performance.now() 的返回值相同，它表示 requestAnimationFrame 执行回调函数的时刻
+- 角度通过经过的时间计算，确保运动速度稳定
 
-<script>
-  let cat = document.querySelector("#cat");
-  let hat = document.querySelector("#hat");
+```js
+function animate(time, lastTime) {
+  if (lastTime != null) {
+    angle += (time - lastTime) * 0.001; }
+  cat.style.top = (Math.sin(angle) * 200) + "px";
+  requestAnimationFrame(
+      newTime => animate(newTime, time));
+```
 
-  let angle = 0;
-  let lastTime = null;
-  function animate(time) {
-    if (lastTime != null) angle += (time - lastTime) * 0.001;
-    lastTime = time;
-    cat.style.top = (Math.sin(angle) * 40 + 40) + "px";
-    cat.style.left = (Math.cos(angle) * 200 + 230) + "px";
+[Example](../js-animation/animation-frame-2.html)
 
-    // Your extensions here.
+---
+# 练习1
 
-    requestAnimationFrame(animate);
-  }
-  requestAnimationFrame(animate);
-</script>
+- 扩展先前定义的椭圆滑板动画
+  - 加一个帽子图片，使运动员和帽子在椭圆上以相反方向旋转
+  - 使帽子绕运动员转一圈
+  - 以其他有趣的方式更改动画
+- 提示
+  - 为使定位多个对象更容易，最好切换到绝对定位
+  - 这意味着顶部和左侧是相对于文档的左上角计算的
+  - 为避免使用负坐标，这将导致图像移至可见页面之外。为此，可以向位置值添加固定数量的像素
 
 ---
 # 提示
 
-Math.cos和Math.sin以弧度测量角度，其中整个圆为2π。对于给定的角度，您可以通过将一半相加得到相反的角度，即Math.PI。这对于将帽子放在轨道的另一侧可能很有用。
+- Math.cos和Math.sin以弧度测量角度，其中整个圆为2π
+- 对于给定的一个角度，您可以加π（即Math.PI），得到相反的角度
+- 这对于将帽子放在轨道的另一侧可能很有用
 
----
-#
-
+???
 https://caniuse.com/#feat=web-animation
 
 ---
-#
+# 练习2
 
-http://webdesigndecal.github.io/showcase/
+- 访问 [WDD](http://webdesigndecal.github.io/showcase/) 网站
+- 选择你喜欢的作品
+- 研究它的代码
 
 ---
-# 练习
+# 练习3
 
-Part 1
+- 从一个包含CSS过渡或动画的网页开始
+  - 可以修改以前的项目，也可以开发新的项目
+  - 添加Javascript动画，无需用户交互，就能够看到动画（类似滑板动画）
+- 代码应至少包括两个DOM查询，一个定义的函数以及一个响应用户操作的事件侦听器
+- 将所有文件放在新目录中并作为外部文档链接到CSS和JavaScript
+
+???
+
 Begin with a web page that includes an original CSS transition or animation. You may work with a previous project of yours or develop a new one if you like. Incorporate JavaScript into the page in such a way that the transition or animation is applied without the user directly interacting (via click, hover, tap, etc.) with the element/s it affects. You are encouraged to be thoughtful about the relationship between browser events and the animation they trigger.
 
 Your script should include at least two DOM queries, one function that you define, and one event listener that responds to a user action. Keep things organized by placing all your files in a new directory and linking to your CSS and JavaScript as external documents.
 
 Finally, include a relative link somewhere on this page to the new page you will create for Part 2.
 
-Part 2
+---
+# 练习4
+
+- 使用JavaScript的requestAnimationFrame（）方法或Web动画API创建新的动画
+- 提示
+  - 如果使用requestAnimationFrame（）方法，则递归调用绘图函数，并随着时间的推移逐步更改CSS的某些方面
+  - 如果使用Web动画API，则用animate（）方法将关键帧对象与计时对象组合在一起
+  - 尽管此动画不需要响应用户的操作，但是您也可以自由地向此页面添加交互性
+
+???
+
 For part two of this assignment, you will create a new animation using either JavaScript’s requestAnimationFrame() method or the Web Animations API. Place this animation on a new page—the one you linked to from Part 1. The animation and its content should be of your own design and also related, either thematically or aesthetically, to the web page from Part 1.
 
 To use the requestAnimationFrame() method, call your drawing function recursively and incrementally change some aspect of CSS over time. Alternatively, if you use the Web Animations API, you will need the animate() method to combine keyframe objects with a timing object.
 
 While this animation does not need to respond to a user’s actions, you are free to add interactivity to this page as well. Your script should include at least one DOM query and one requestAnimationFrame() or animate() method. Files should be placed in the same directory you created in Part 1; CSS and JavaScript should be linked to externally.
-
----
-# 要求
 
 Part 1: A CSS transition or animation applied indirectly with JavaScript (2 points)
 Part 1: At least two JavaScript DOM queries (1 point)

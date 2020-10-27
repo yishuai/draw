@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- saved from url=(0090)http://i6.cims.nyu.edu/~jc3436/drawing/canvas/video-processing/video-pixel-processing.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Canvas Video Pixel Processing</title>
+
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+      }
+
+      canvas {
+        /*border: 1px solid black;*/
+      }
+    </style>
+</head>
+
+  <body style="margin-right: 0px; transition: all 0.25s ease-in 0s;">
+    <canvas id="drawing" width="450" height="300" style="width: 450px; height: 300px;"></canvas>
+
+    <div style="display: none">
+      <video autoplay="" loop="" muted="" playsinline="" src="waves.mp4"></video>
+      <!-- include these video attributes for browser compatibility -->
+    </div>
+
+    <script>
+      const canvas = document.getElementById('drawing');
+      const context = canvas.getContext('2d');
+
+      let width;
+      let height;
+
+      // get ratio of the resolution in physical pixels to the resolution in CSS pixels
+      let pxScale = window.devicePixelRatio;
+
+      let video = document.querySelector('video');
+
+      function setup() {
+        // fixed canvas size
+        width = canvas.width;
+        height = canvas.height;
+
+        // set the CSS display size
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        // set the number of display pixels, scaled for device resolution
+        canvas.width = width * pxScale;
+        canvas.height = height * pxScale;
+
+        // normalize the coordinate system
+        context.scale(pxScale, pxScale);
+
+        // make sure video begins to play (some browsers disregard autoplay attribute)
+        video.play();
+      }
+
+      let imgScale = 10;
+
+      function draw() {
+        // draw video image, scaled down by a factor of imgScale * pxScale
+        context.drawImage(video, 0, 0, 533 / (imgScale * pxScale), 300  / (imgScale * pxScale));
+
+        // access video image data
+        let imageData = context.getImageData(0, 0, width/imgScale, height/imgScale);
+        let data = imageData.data;
+
+        // clear original video
+        context.clearRect(0, 0, width, height);
+
+        for (let y = 0; y < imageData.height; y++) {
+          for (let x = 0; x < imageData.width; x++) {
+            let index = (x + y * imageData.width) * 4; // index position of every pixel
+
+            let r = data[index + 0]; // red
+            let g = data[index + 1]; // green
+            let b = data[index + 2]; // blue
+            let a = data[index + 3]; // alpha
+
+            // apply rgb as fill color to subsequent shapes
+            context.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ', 1)';
+
+            // draw rectangle at x (scaled up) and y (scaled up) with width and height
+            // context.fillRect(x * imgScale, y * imgScale, imgScale, imgScale)
+
+            context.save();
+            context.translate(imgScale/2, imgScale/2); // optional to center in frame
+            context.beginPath();
+            // circle
+            context.arc(x * imgScale, y * imgScale, imgScale / 2, 0, Math.PI * 2);
+            context.fill();
+            context.restore();
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      setup();
+
+      // wait for video to play before drawing to the canvas
+      video.addEventListener('play', draw);
+    </script>
+
+</body></html>
