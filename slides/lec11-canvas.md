@@ -412,14 +412,22 @@ window.addEventListener('resize',
 ---
 # 变换
 
+- 变换使您可以在多个方向上绘制形状
+- 可以在绘图上下文中进行转换：平移，缩放和旋转
+- 将影响所有后续绘图操作
+- 可使用save方法保存转换状态
+- 使用restore方法恢复转换状态
+
 ```js
 context.scale(1.5, 1.5);
 context.translate(50, 0);
 ```
 
-Transformations allow you to draw a shape in multiple orientations. A 2D drawing context has a current transformation that can be changed with the translate, scale, and rotate methods. These will affect all subsequent drawing operations. A transformation state can be saved with the save method and restored with the restore method.
 
 [示例](../canvas/canvas/5-canvas/14-compose.html)
+
+???
+Transformations allow you to draw a shape in multiple orientations. A 2D drawing context has a current transformation that can be changed with the translate, scale, and rotate methods. These will affect all subsequent drawing operations. A transformation state can be saved with the save method and restored with the restore method.
 
 ---
 # 组合
