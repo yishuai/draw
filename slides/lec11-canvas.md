@@ -16,8 +16,6 @@ class: middle, center
 - 它提供一个编程接口，用于在节点占用的空间上绘制形状
 - 使用JavaScript在浏览器中绘制光栅图形
 - 可用于动画、游戏画面、数据可视化、图片编辑以及实时视频处理
-- 默认情况下，canvas 元素是透明的，没有边框，没有内容
-- 一个HTML页面可以包含多个画布元素
 
 ???
 
@@ -27,8 +25,10 @@ A canvas is a single DOM element that encapsulates a picture. It provides a prog
 # canvas元素
 
 - 画布图形可以绘制到 canvas 元素上
+- 一个HTML页面可以包含多个画布元素
 - 可以设定 canvas 元素的width和height属性，以确定其大小（以像素为单位）
 - 一个新的画布是空的，这意味着它是完全透明的，因此在文档中显示为空白
+  - 透明的，没有边框，没有内容
 
 ---
 # 绘图样式
@@ -173,9 +173,9 @@ context.strokeRect(150, 75, 200, 200);
   - 通过描边或填充路径区域来渲染图形
 
 ---
-# Path2D
+# SVG Path
 
-- SVG Path
+- Path2D
 
 ```js
 let path = new Path2D("
@@ -247,7 +247,7 @@ context.fill();
 path needs to be closed (meaning its start and end are in the same position) before it can be filled. If the path is not already closed, a line is added from its end to its start, and the shape enclosed by the completed path is filled.
 
 ---
-# Arc
+# 弧线
 
 - arc(x, y, radius, startAngle, endAngle, anticlockwise)
   - 画一个以（x,y）为圆心的以 radius 为半径的圆弧（圆）
@@ -323,7 +323,6 @@ context.scale(scale, scale);
 ```js
 context.drawImage(image, 0, 0, 450, 300);
 ```
-
 
 [示例](../canvas/14-image.html)
 
