@@ -568,7 +568,7 @@ context.fill(path);
 ---
 # 练习3
 
-- 创建一个HTML画布图形
+- 用这个[模板](../canvas/canvas-template.zip)创建一个HTML画布图形
 - 每个画布为600×400（CSS）像素
 - 使用窗口对象的devicePixelRatio属性来缩放
 - 应包括使用canvas API的path方法绘制的自定义形状
