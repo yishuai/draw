@@ -12,41 +12,32 @@ class: middle, center
 # 介绍
 
 - HTML5 canvas API
-- 画布是封装图片的单个DOM元素
-- 它提供一个编程接口，用于在节点占用的空间上绘制形状
-- 使用JavaScript在浏览器中绘制光栅图形
-- 可用于动画、游戏画面、数据可视化、图片编辑以及实时视频处理
+- 画布是绘图用的单个DOM元素
+- 它提供一个编程接口，用于在节点占用的空间上绘制图像
+- 使用JavaScript绘制光栅图像
+- 可用于动画、游戏、数据可视化、图片编辑以及实时视频处理
 
 ???
 
 A canvas is a single DOM element that encapsulates a picture. It provides a programming interface for drawing shapes onto the space taken up by the node.
 
 ---
-# canvas元素
-
-- 画布图形可以绘制到 canvas 元素上
-- 一个HTML页面可以包含多个画布元素
-- 可以设定 canvas 元素的width和height属性，以确定其大小（以像素为单位）
-- 一个新的画布是空的，这意味着它是完全透明的，因此在文档中显示为空白
-  - 透明的，没有边框，没有内容
-
----
 # 绘图样式
 
-- 当前有两种广泛支持的绘图样式
-- Canvas API聚焦于二维图形
-- WebGL API聚焦于三维图形
-  - 通过OpenGL接口用于三维图形
-  - 同样使用 canvas 元素
-  - 绘制硬件加速的2D和3D图形
-  - 提供了图形硬件的直接接口，允许用JavaScript有效渲染复杂场景
+- 两种广泛支持的绘图样式
+- Canvas API 绘制二维图形
+- WebGL API 绘制三维图形
+  - 通过OpenGL接口绘制三维图形
+  - 硬件加速
+  - 允许用JavaScript有效渲染复杂场景
 
 ---
 # 和SVG区别
 
-- SVG中，保留了形状的原始描述，以便可以随时移动或调整形状
-- 画布在绘制形状后立即将其转换为像素（光栅上的彩色点），并且不记得这些像素代表什么
-  - 在画布上移动形状的唯一方法是清除画布（或画布中围绕该形状的部分）并在新位置重新绘制形状
+- SVG中，保留了形状的原始描述，以便可以移动、放大
+- Canvas在画布绘制后，立即将其转换为像素（光栅上的彩色点）
+  - 不记得这些像素代表什么
+  - 移动图像的唯一方法是清除画布（或画布中围绕该形状的部分）并在新位置重新绘制形状
 
 ???
 
@@ -64,29 +55,19 @@ There are currently two widely supported drawing styles: "2d" for two-dimensiona
 This book won’t discuss WebGL—we’ll stick to two dimensions. But if you are interested in three-dimensional graphics, I do encourage you to look into WebGL. It provides a direct interface to graphics hardware and allows you to render even complicated scenes efficiently, using JavaScript.
 
 ---
-# 设置
+# canvas元素
 
-- HTML画布是网页上的矩形区域
-- 默认大小为300×150像素（宽×高）
-  - 可使用HTML的高度和宽度属性来定义 Canvas 尺寸
-  - 为了在 Canvas 上绘制图形，使用一个JavaScript上下文对象（context），它能动态创建图像
-
-```js
-canvas.style.height = height + 'px';
-let scale = window.devicePixelRatio;
-canvas.width = width * scale;
-const context = canvas.getContext('2d');
-context.scale(scale, scale);    // 标准化坐标系
-```
-
-[示例](../canvas/14-setup.html)
+- 图形绘制到 canvas 元素上
+- 一个HTML页面可以包含多个画布元素
+- 一个新的画布是空的，完全透明，在文档中显示为空白
+  - 没有边框，没有内容
 
 ---
 # 绘制
 
-- 所有绘制到画布上的操作都须使用JavaScript完成
+- 所有绘制都用JavaScript完成
 - 首先通过DOM查询引用画布
-- 然后使用其getContext（）方法指定二维绘图
+- 然后使用其getContext（）得到JavaScript上下文对象（context），它能动态创建图像
   - 画布是笛卡尔网格，其左上角的坐标为（0，0）
 
 ```js
@@ -97,17 +78,7 @@ context.lineTo(canvas.width, canvas.height);
 context.stroke();
 ```
 
-[示例](../canvas/13-basic.html)
-
----
-# 形状
-
-- 填充形状
-- 可以给区域指定某种颜色或图案
-- 也可以描边：沿着边缘绘制一条线
-
-???
-a shape can be filled, meaning its area is given a certain color or pattern, or it can be stroked, which means a line is drawn along its edge.
+[示例](../canvas/1-basic.html)
 
 ---
 # 方法
@@ -130,7 +101,47 @@ context.lineTo(canvas.width, canvas.height);
 context.stroke(); // 画线
 ```
 
-[示例](../canvas/13-basic.html)
+[示例](../canvas/1-basic.html)
+
+---
+# 弧线
+
+- arc(x, y, radius, startAngle, endAngle, anticlockwise)
+  - 画一个以（x,y）为圆心的以 radius 为半径的圆弧
+  - 从 startAngle （开始角度）到 endAngle （结束角度）
+  - 按照 anticlockwise （时钟方向）给定的方向（默认为顺时针）来生成
+
+```js
+context.arc(canvas.width/2,
+            canvas.height/2, 125, 0, 4);
+```
+
+---
+# 贝塞尔曲线
+
+- quadraticCurveTo(cp1x, cp1y, x, y)
+  - 二次贝塞尔曲线
+  - cp1x,cp1y为一个控制点
+  - x,y为结束点
+
+- bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+  - 三次贝塞尔曲线
+  - cp1x,cp1y为控制点一
+  - cp2x,cp2y为控制点二
+  - x,y为结束点
+
+---
+# 形状
+
+- 画布仅支持两种基本形状
+  - 矩形和椭圆形
+- 可以填充（fill）形状
+  - 给填充区域指定某种颜色或图案
+- 也可以描边（stroke）
+  - 沿着边缘绘制一条线
+
+???
+a shape can be filled, meaning its area is given a certain color or pattern, or it can be stroked, which means a line is drawn along its edge.
 
 ---
 # 矩形 Rect
@@ -138,7 +149,7 @@ context.stroke(); // 画线
 - 三种方法
   - fillRect(x, y, width, height) 绘制一个填充的矩形
   - strokeRect(x, y, width, height) 绘制一个矩形的边框
-  - clearRect(x, y, width, height) 清除指定矩形区域，让清除部分完全透明。
+  - clearRect(x, y, width, height) 清除指定矩形区域，让清除部分完全透明
 - 参数
   - x与y指定制矩形的左上角（相对于原点）坐标
   - width和height设置矩形尺寸
@@ -159,105 +170,7 @@ context.strokeStyle = 'rgb(255, 200, 0)';
 context.strokeRect(150, 75, 200, 200);
 ```
 
-[示例](../canvas/13-rect.html)
-
----
-# Path
-
-- 图形的基本元素是路径
-  - 路径是通过不同颜色和宽度的线段或曲线相连形成的不同形状的点的集合
-  - 一个路径，甚至一个子路径，都是闭合的
-- 步骤
-  - 使用路径绘制图形需要一些额外的步骤
-  - 首先创建路径起始点，然后画出路径，之后把路径封闭
-  - 通过描边或填充路径区域来渲染图形
-
----
-# SVG Path
-
-- Path2D
-
-```js
-let path = new Path2D("
-    M 20 40
-    L 100 20
-    L 175 125
-    L 120 180 z");
-```
-
-[示例](../canvas/14-path2d.html)
-
----
-# Path
-
-- beginPath()
-  - 新建一条路径，图形绘制命令被指向到路径上生成路径
-- closePath()
-  - 闭合路径，绘制一条从当前点到开始点的直线来闭合图形
-  - 之后图形绘制命令又重新指向到上下文中
-
-```js
-context.beginPath();
-context.moveTo(225, 50);
-context.lineTo(350, 250);
-context.closePath();
-```
-
-[示例](../canvas/13-path.html)
-
----
-# Path
-
-- stroke()
-  - 通过线条来绘制图形轮廓
-- fill()
-  - 通过填充路径的内容区域生成实心的图形
-
-```js
-context.fillStyle = gradient;
-context.beginPath();
-context.moveTo(225, 50);
-context.lineTo(350, 250);
-context.closePath();
-context.stroke();
-context.fill();
-```
-
-[示例](../canvas/13-path.html)
-
----
-# Path fill
-
-- 必须先关闭路径，使起点和终点就在同一位置，然后才能填充它
-- 如果尚未关闭路径，则从其末端到其起点添加一条线，并填充完成路径所包围的形状
-
-```js
-context.fillStyle = gradient;
-context.beginPath();
-context.moveTo(225, 50);
-context.lineTo(350, 250);
-context.closePath();
-context.stroke();
-context.fill();
-```
-
-[示例](../canvas/13-path.html)
-
-???
-path needs to be closed (meaning its start and end are in the same position) before it can be filled. If the path is not already closed, a line is added from its end to its start, and the shape enclosed by the completed path is filled.
-
----
-# 弧线
-
-- arc(x, y, radius, startAngle, endAngle, anticlockwise)
-  - 画一个以（x,y）为圆心的以 radius 为半径的圆弧（圆）
-  - 从 startAngle 开始到 endAngle 结束
-  - 按照 anticlockwise 给定的方向（默认为顺时针）来生成
-
-```js
-context.arc(canvas.width/2,
-            canvas.height/2, 125, 0, 4);
-```
+[示例](../canvas/2-rect.html)
 
 ---
 # 椭圆
@@ -275,30 +188,118 @@ context.ellipse(canvas.width/2,
 ```
 
 ---
-# 贝塞尔曲线
+# Path
 
-- quadraticCurveTo(cp1x, cp1y, x, y)
-  - 绘制二次贝塞尔曲线
-  - cp1x,cp1y为一个控制点
-  - x,y为结束点
+- 图形的基本元素是路径
+  - 路径是通过不同颜色和宽度的线段或曲线相连形成的不同形状的点的集合
+  - 一个路径，甚至一个子路径，都是闭合的
+- 步骤
+  - 使用路径绘制图形需要一些额外的步骤
+  - 首先创建路径起始点，然后画出路径，之后把路径封闭
+  - 然后描边或填充路径区域来渲染图形
 
-- bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
-  - 绘制三次贝塞尔曲线
-  - cp1x,cp1y为控制点一
-  - cp2x,cp2y为控制点二
-  - x,y为结束点
+---
+# SVG Path
+
+- Path2D
+
+```js
+let path = new Path2D("
+    M 20 40
+    L 100 20
+    L 175 125
+    L 120 180 z");
+```
+
+[示例](../canvas/3-path2d.html)
+
+---
+# Path
+
+- beginPath()
+  - 新建一条路径，图形绘制命令被指向到路径上生成路径
+- closePath()
+  - 闭合路径，绘制一条从当前点到开始点的直线来闭合图形
+  - 之后图形绘制命令又重新指向到上下文中
+
+```js
+context.beginPath();
+context.moveTo(225, 50);
+context.lineTo(350, 250);
+context.closePath();
+```
+
+[示例](../canvas/4-path.html)
+
+---
+# Path
+
+- stroke()
+  - 描边
+- fill()
+  - 填充
+
+```js
+context.fillStyle = gradient;
+context.beginPath();
+context.moveTo(225, 50);
+context.lineTo(350, 250);
+context.closePath();
+context.stroke();
+context.fill();
+```
+
+[示例](../canvas/4-path.html)
+
+---
+# Path fill 填充
+
+- 必须先关闭路径，使起点和终点就在同一位置，然后才能填充它
+- 如果尚未关闭路径，则从其末端到其起点添加一条线，并填充完成路径所包围的形状
+
+```js
+context.fillStyle = gradient;
+context.beginPath();
+context.moveTo(225, 50);
+context.lineTo(350, 250);
+context.closePath();
+context.stroke();
+context.fill();
+```
+
+[示例](../canvas/4-path.html)
+
+???
+path needs to be closed (meaning its start and end are in the same position) before it can be filled. If the path is not already closed, a line is added from its end to its start, and the shape enclosed by the completed path is filled.
 
 ---
 # 循环绘画
 
 - 利用编程的强大能力，自动绘画
 
-[示例](../canvas/13-loops.html)
+[示例](../canvas/5-loops.html)
+
+---
+# 大小设置
+
+- Canvas 画布是网页上的一个矩形区域
+- 默认大小为300×150像素（宽×高）
+  - 可以设定 canvas 元素的width和height属性，以确定其大小（以像素为单位）
+
+```js
+canvas.style.height = height + 'px';
+let scale = window.devicePixelRatio;
+canvas.width = width * scale;
+```
+
+[示例](../canvas/6-setup.html)
 
 ---
 # 放大和缩小
 
-- window.devicePixelRatio 存在放大倍数
+- window.devicePixelRatio 存着网页的放大倍数
+  - 网页放大缩小时，会变化
+- 设置 context.scale，这样图像大小也会随着网页的放大/缩小而变化
 
 ```
 canvas.style.width = referenceWidth + 'px';
@@ -309,22 +310,23 @@ canvas.width = referenceWidth * scale;
 context.scale(scale, scale);
 ```
 
-[示例](../canvas/13-scale.html)
+[示例](../canvas/7-scale.html)
 
 ---
-# 图片
+# 绘制图片
 
-- 使用drawImage方法将像素从图像或其他画布移到我们的画布上
+- drawImage，按照一副图像或其他画布，绘制我们的画布
+  - 像素级复制
 - 默认绘制整个源图像
-- 提供更多参数，可以复制图像的特定区域
-- 游戏编程
+  - 提供更多参数，可以复制图像的特定区域
+- 应用：游戏编程
   - 从包含各种姿势的图像中复制游戏角色的各种图像，来获得游戏的动态效果
 
 ```js
 context.drawImage(image, 0, 0, 450, 300);
 ```
 
-[示例](../canvas/14-image.html)
+[示例](../canvas/8-image.html)
 
 ???
 Moving pixels from an image or another canvas onto our canvas is done with the drawImage method. By default, this method draws the whole source image, but by giving it more parameters, you can copy a specific area of the image. We used this for our game by copying individual poses of the game character out of an image that contained many such poses.
@@ -332,23 +334,10 @@ Moving pixels from an image or another canvas onto our canvas is done with the d
 ---
 # 图像处理
 
-- 颜色转换
+- 图像中的每个元素，以R，G，B，顺序存在一个数组中
+- 设置随机像素
 
-```js
-let imageData = context.getImageData
-        (0, 0, canvas.width, canvas.height);
-let data = imageData.data;
-for (let i = 0; i < data.length; i += 4) {
-    data[i] = 255 - data[i]; // red
-    data[i + 1] = 255 - data[i + 1]; // green
-    data[i + 2] = 255 - data[i + 2]; // blue
-}
-context.putImageData(imageData, 0, 0);
-```
-
-[示例](../canvas/15-image-proc.html)
-
-[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas)
+[示例](../canvas/9-random-pixels.html)
 
 ---
 # 图像处理
@@ -368,14 +357,29 @@ for (let y = 0; y < canvas.height; y++) {
     }
 }
 ```
-[示例](../canvas/15-pixel-gradient.html)
+[示例](../canvas/10-pixel-gradient.html)
 
 ---
 # 图像处理
 
-- 随机像素
+- 处理每一个像素
+- 颜色反转
 
-[示例](../canvas/15-random-pixels.html)
+```js
+let imageData = context.getImageData
+        (0, 0, canvas.width, canvas.height);
+let data = imageData.data;
+for (let i = 0; i < data.length; i += 4) {
+    data[i] = 255 - data[i]; // red
+    data[i + 1] = 255 - data[i + 1]; // green
+    data[i + 2] = 255 - data[i + 2]; // blue
+}
+context.putImageData(imageData, 0, 0);
+```
+
+[示例](../canvas/11-image-proc.html)
+
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas)
 
 ---
 # 文字
@@ -390,7 +394,7 @@ context.strokeStyle = 'black';
 context.strokeText('科蚪加油！', width/2, height/2);
 ```
 
-[示例](../canvas/14-text.html)
+[示例](../canvas/12-text.html)
 
 ---
 
@@ -408,15 +412,15 @@ window.addEventListener('resize',
 
 ```
 
-[示例](../canvas/15-full-text.html)
+[示例](../canvas/13-full-text.html)
 
 ---
-# 变换
+# 状态切换
 
-- 平移，缩放和旋转
-  - 将影响所有后续绘图操作
-  - 使用save方法保存变换状态
-  - 使用restore方法恢复变换状态
+- 平移，缩放和旋转，会改变 context 状态
+  - 影响所有后续绘图操作
+- 所以，在做它之前，可以使用save方法保存变换前的状态
+  - 完成之后，再使用restore方法恢复变换前的状态
 
 ```js
 context.save(); // 保存当前坐标系
@@ -425,15 +429,13 @@ context.fill(path); // 画出Path
 context.restore(); // 恢复坐标系
 ```
 
-[示例1](../canvas/14-compose.html)
-
-[示例2](../canvas/15-save-restore.html)
+[示例2](../canvas/14-save-restore.html)
 
 ???
 Transformations allow you to draw a shape in multiple orientations. A 2D drawing context has a current transformation that can be changed with the translate, scale, and rotate methods. These will affect all subsequent drawing operations. A transformation state can be saved with the save method and restored with the restore method.
 
 ---
-# 组合
+# 遮盖方式
 
 - 之前例子里，总是将一个图形画在另一个上
 - 可利用 globalCompositeOperation 属性来改变
@@ -445,23 +447,23 @@ Transformations allow you to draw a shape in multiple orientations. A 2D drawing
 ```js
 context.globalCompositeOperation = 'difference';
 ```
+[示例](../canvas/canvas/5-canvas/15-compose.html)
 
 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Compositing)
 
-[示例](../canvas/canvas/5-canvas/14-compose.html)
 
 ---
 # 动画
 
-- 定时重绘
-- 两种方法
+- 定时重绘，得到动画效果
+- 两种定时的方法
   - setInterval 和 setTimeout 定时重绘
   - requestAnimationFrame（）方法非常适合画布动画
 
 ---
 # 绘制步骤
 
-- 清除画布
+- 先清除画布
   - clearRect 清空 canvas 所有内容
 - 保存画布状态
   - 如果要改变一些会改变 canvas 状态的设置（样式，变形之类的），又要在每画一帧之时都是原始状态的话，你需要先保存一下
@@ -471,10 +473,9 @@ context.globalCompositeOperation = 'difference';
 ---
 # 示例
 
-[示例1](../canvas/14-animation.html)
+[示例1](../canvas/17-animation.html)
 
-
-[示例2](../canvas/16-animation-transform.html)
+[示例2](../canvas/18-animation-transform.html)
 
 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_animations)
 
@@ -501,10 +502,12 @@ function draw() {
 video.addEventListener('play', draw);
 ```
 
-[示例1](../canvas/15-video.html)
+[示例1](../canvas/19-video.html)
 
 ---
 # 视频处理（特效）
+
+- 类似图像处理，也可以对视频图像的逐帧进行处理
 
 ```js
 // video image processing
@@ -517,14 +520,14 @@ for (let i = 0; i < data.length; i += 4) {
 }
 ```
 
-[示例1](../canvas/15-video-effect.html)
+[示例1](../canvas/20-video-effect.html)
 
-[示例2](../canvas/16-video-effect.html)
+[示例2](../canvas/21-video-effect.html)
 
 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Manipulating_video_using_canvas)
 
 ---
-# 视频和SVG
+# 视频和SVG叠加
 
 ```js
 // SVG path data for each video pixel
@@ -534,7 +537,7 @@ context.globalCompositeOperation = 'soft-light';
 context.fill(path);
 ```
 
-[示例](../canvas/16-video-svg.html)
+[示例](../canvas/22-video-svg.html)
 
 ---
 # 注意
